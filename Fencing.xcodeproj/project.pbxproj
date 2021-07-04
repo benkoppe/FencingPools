@@ -1,0 +1,697 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B5205F92268FF51C00022CCD /* FencingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5205F91268FF51C00022CCD /* FencingApp.swift */; };
+		B5205F94268FF51C00022CCD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5205F93268FF51C00022CCD /* ContentView.swift */; };
+		B5205F96268FF51D00022CCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5205F95268FF51D00022CCD /* Assets.xcassets */; };
+		B5205F99268FF51D00022CCD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5205F98268FF51D00022CCD /* Preview Assets.xcassets */; };
+		B5205F9B268FF51D00022CCD /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5205F9A268FF51D00022CCD /* Persistence.swift */; };
+		B5205F9E268FF51D00022CCD /* Fencing.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5205F9C268FF51D00022CCD /* Fencing.xcdatamodeld */; };
+		B5205FA9268FF51E00022CCD /* FencingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5205FA8268FF51E00022CCD /* FencingTests.swift */; };
+		B5205FB4268FF51E00022CCD /* FencingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5205FB3268FF51E00022CCD /* FencingUITests.swift */; };
+		B5205FC52690361500022CCD /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = B5205FC42690361500022CCD /* PopupView */; };
+		B5205FD42690AF2200022CCD /* Bout+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5205FD02690AF2200022CCD /* Bout+CoreDataClass.swift */; };
+		B5205FD52690AF2200022CCD /* Bout+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5205FD12690AF2200022CCD /* Bout+CoreDataProperties.swift */; };
+		B5205FD62690AF2200022CCD /* Pool+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5205FD22690AF2200022CCD /* Pool+CoreDataClass.swift */; };
+		B5205FD72690AF2200022CCD /* Pool+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5205FD32690AF2200022CCD /* Pool+CoreDataProperties.swift */; };
+		B5205FDD2690BA5A00022CCD /* PoolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5205FDC2690BA5A00022CCD /* PoolView.swift */; };
+		B5205FE02690E24200022CCD /* Fencer+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5205FDE2690E24200022CCD /* Fencer+CoreDataClass.swift */; };
+		B5205FE12690E24200022CCD /* Fencer+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5205FDF2690E24200022CCD /* Fencer+CoreDataProperties.swift */; };
+		B52FA61626910A4300CD5331 /* FormatScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FA61526910A4300CD5331 /* FormatScore.swift */; };
+		B52FA618269170AF00CD5331 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FA617269170AF00CD5331 /* SettingsView.swift */; };
+		B52FA61C2691827700CD5331 /* GridInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FA61B2691827700CD5331 /* GridInfo.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B5205FA5268FF51E00022CCD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5205F86268FF51C00022CCD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5205F8D268FF51C00022CCD;
+			remoteInfo = Fencing;
+		};
+		B5205FB0268FF51E00022CCD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5205F86268FF51C00022CCD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5205F8D268FF51C00022CCD;
+			remoteInfo = Fencing;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B5205F8E268FF51C00022CCD /* Fencing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fencing.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5205F91268FF51C00022CCD /* FencingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FencingApp.swift; sourceTree = "<group>"; };
+		B5205F93268FF51C00022CCD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B5205F95268FF51D00022CCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B5205F98268FF51D00022CCD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B5205F9A268FF51D00022CCD /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		B5205F9D268FF51D00022CCD /* Fencing.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Fencing.xcdatamodel; sourceTree = "<group>"; };
+		B5205F9F268FF51D00022CCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5205FA4268FF51E00022CCD /* FencingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FencingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5205FA8268FF51E00022CCD /* FencingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FencingTests.swift; sourceTree = "<group>"; };
+		B5205FAA268FF51E00022CCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5205FAF268FF51E00022CCD /* FencingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FencingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5205FB3268FF51E00022CCD /* FencingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FencingUITests.swift; sourceTree = "<group>"; };
+		B5205FB5268FF51E00022CCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5205FD02690AF2200022CCD /* Bout+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bout+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		B5205FD12690AF2200022CCD /* Bout+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bout+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		B5205FD22690AF2200022CCD /* Pool+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pool+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		B5205FD32690AF2200022CCD /* Pool+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pool+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		B5205FDC2690BA5A00022CCD /* PoolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoolView.swift; sourceTree = "<group>"; };
+		B5205FDE2690E24200022CCD /* Fencer+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fencer+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		B5205FDF2690E24200022CCD /* Fencer+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fencer+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		B52FA61526910A4300CD5331 /* FormatScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatScore.swift; sourceTree = "<group>"; };
+		B52FA617269170AF00CD5331 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B52FA61B2691827700CD5331 /* GridInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridInfo.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B5205F8B268FF51C00022CCD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5205FC52690361500022CCD /* PopupView in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5205FA1268FF51E00022CCD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5205FAC268FF51E00022CCD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B5205F85268FF51C00022CCD = {
+			isa = PBXGroup;
+			children = (
+				B5205F90268FF51C00022CCD /* Fencing */,
+				B5205FA7268FF51E00022CCD /* FencingTests */,
+				B5205FB2268FF51E00022CCD /* FencingUITests */,
+				B5205F8F268FF51C00022CCD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B5205F8F268FF51C00022CCD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B5205F8E268FF51C00022CCD /* Fencing.app */,
+				B5205FA4268FF51E00022CCD /* FencingTests.xctest */,
+				B5205FAF268FF51E00022CCD /* FencingUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B5205F90268FF51C00022CCD /* Fencing */ = {
+			isa = PBXGroup;
+			children = (
+				B5205F91268FF51C00022CCD /* FencingApp.swift */,
+				B5205F93268FF51C00022CCD /* ContentView.swift */,
+				B52FA617269170AF00CD5331 /* SettingsView.swift */,
+				B5205FDC2690BA5A00022CCD /* PoolView.swift */,
+				B5205F95268FF51D00022CCD /* Assets.xcassets */,
+				B5205F9F268FF51D00022CCD /* Info.plist */,
+				B52FA61226910A0000CD5331 /* Extensions */,
+				B5205FC62690AED300022CCD /* CoreData */,
+				B5205F97268FF51D00022CCD /* Preview Content */,
+			);
+			path = Fencing;
+			sourceTree = "<group>";
+		};
+		B5205F97268FF51D00022CCD /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				B5205F98268FF51D00022CCD /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B5205FA7268FF51E00022CCD /* FencingTests */ = {
+			isa = PBXGroup;
+			children = (
+				B5205FA8268FF51E00022CCD /* FencingTests.swift */,
+				B5205FAA268FF51E00022CCD /* Info.plist */,
+			);
+			path = FencingTests;
+			sourceTree = "<group>";
+		};
+		B5205FB2268FF51E00022CCD /* FencingUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B5205FB3268FF51E00022CCD /* FencingUITests.swift */,
+				B5205FB5268FF51E00022CCD /* Info.plist */,
+			);
+			path = FencingUITests;
+			sourceTree = "<group>";
+		};
+		B5205FC62690AED300022CCD /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				B5205FC72690AEE600022CCD /* Entities */,
+				B5205F9A268FF51D00022CCD /* Persistence.swift */,
+				B5205F9C268FF51D00022CCD /* Fencing.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		B5205FC72690AEE600022CCD /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				B5205FDE2690E24200022CCD /* Fencer+CoreDataClass.swift */,
+				B5205FDF2690E24200022CCD /* Fencer+CoreDataProperties.swift */,
+				B5205FD02690AF2200022CCD /* Bout+CoreDataClass.swift */,
+				B5205FD12690AF2200022CCD /* Bout+CoreDataProperties.swift */,
+				B5205FD22690AF2200022CCD /* Pool+CoreDataClass.swift */,
+				B5205FD32690AF2200022CCD /* Pool+CoreDataProperties.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		B52FA61226910A0000CD5331 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B52FA61526910A4300CD5331 /* FormatScore.swift */,
+				B52FA61B2691827700CD5331 /* GridInfo.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B5205F8D268FF51C00022CCD /* Fencing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5205FB8268FF51E00022CCD /* Build configuration list for PBXNativeTarget "Fencing" */;
+			buildPhases = (
+				B5205F8A268FF51C00022CCD /* Sources */,
+				B5205F8B268FF51C00022CCD /* Frameworks */,
+				B5205F8C268FF51C00022CCD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Fencing;
+			packageProductDependencies = (
+				B5205FC42690361500022CCD /* PopupView */,
+			);
+			productName = Fencing;
+			productReference = B5205F8E268FF51C00022CCD /* Fencing.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B5205FA3268FF51E00022CCD /* FencingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5205FBB268FF51E00022CCD /* Build configuration list for PBXNativeTarget "FencingTests" */;
+			buildPhases = (
+				B5205FA0268FF51E00022CCD /* Sources */,
+				B5205FA1268FF51E00022CCD /* Frameworks */,
+				B5205FA2268FF51E00022CCD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B5205FA6268FF51E00022CCD /* PBXTargetDependency */,
+			);
+			name = FencingTests;
+			productName = FencingTests;
+			productReference = B5205FA4268FF51E00022CCD /* FencingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B5205FAE268FF51E00022CCD /* FencingUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5205FBE268FF51E00022CCD /* Build configuration list for PBXNativeTarget "FencingUITests" */;
+			buildPhases = (
+				B5205FAB268FF51E00022CCD /* Sources */,
+				B5205FAC268FF51E00022CCD /* Frameworks */,
+				B5205FAD268FF51E00022CCD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B5205FB1268FF51E00022CCD /* PBXTargetDependency */,
+			);
+			name = FencingUITests;
+			productName = FencingUITests;
+			productReference = B5205FAF268FF51E00022CCD /* FencingUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B5205F86268FF51C00022CCD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					B5205F8D268FF51C00022CCD = {
+						CreatedOnToolsVersion = 12.5;
+					};
+					B5205FA3268FF51E00022CCD = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = B5205F8D268FF51C00022CCD;
+					};
+					B5205FAE268FF51E00022CCD = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = B5205F8D268FF51C00022CCD;
+					};
+				};
+			};
+			buildConfigurationList = B5205F89268FF51C00022CCD /* Build configuration list for PBXProject "Fencing" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B5205F85268FF51C00022CCD;
+			packageReferences = (
+				B5205FC32690361500022CCD /* XCRemoteSwiftPackageReference "PopupView" */,
+			);
+			productRefGroup = B5205F8F268FF51C00022CCD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B5205F8D268FF51C00022CCD /* Fencing */,
+				B5205FA3268FF51E00022CCD /* FencingTests */,
+				B5205FAE268FF51E00022CCD /* FencingUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B5205F8C268FF51C00022CCD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5205F99268FF51D00022CCD /* Preview Assets.xcassets in Resources */,
+				B5205F96268FF51D00022CCD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5205FA2268FF51E00022CCD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5205FAD268FF51E00022CCD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B5205F8A268FF51C00022CCD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5205F9B268FF51D00022CCD /* Persistence.swift in Sources */,
+				B5205FE12690E24200022CCD /* Fencer+CoreDataProperties.swift in Sources */,
+				B5205F94268FF51C00022CCD /* ContentView.swift in Sources */,
+				B5205FD62690AF2200022CCD /* Pool+CoreDataClass.swift in Sources */,
+				B5205FDD2690BA5A00022CCD /* PoolView.swift in Sources */,
+				B52FA61C2691827700CD5331 /* GridInfo.swift in Sources */,
+				B5205FE02690E24200022CCD /* Fencer+CoreDataClass.swift in Sources */,
+				B52FA61626910A4300CD5331 /* FormatScore.swift in Sources */,
+				B5205F9E268FF51D00022CCD /* Fencing.xcdatamodeld in Sources */,
+				B5205FD42690AF2200022CCD /* Bout+CoreDataClass.swift in Sources */,
+				B5205FD72690AF2200022CCD /* Pool+CoreDataProperties.swift in Sources */,
+				B5205F92268FF51C00022CCD /* FencingApp.swift in Sources */,
+				B5205FD52690AF2200022CCD /* Bout+CoreDataProperties.swift in Sources */,
+				B52FA618269170AF00CD5331 /* SettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5205FA0268FF51E00022CCD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5205FA9268FF51E00022CCD /* FencingTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5205FAB268FF51E00022CCD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5205FB4268FF51E00022CCD /* FencingUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B5205FA6268FF51E00022CCD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5205F8D268FF51C00022CCD /* Fencing */;
+			targetProxy = B5205FA5268FF51E00022CCD /* PBXContainerItemProxy */;
+		};
+		B5205FB1268FF51E00022CCD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5205F8D268FF51C00022CCD /* Fencing */;
+			targetProxy = B5205FB0268FF51E00022CCD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		B5205FB6268FF51E00022CCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B5205FB7268FF51E00022CCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B5205FB9268FF51E00022CCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Fencing/Preview Content\"";
+				DEVELOPMENT_TEAM = 4DWUZ6JCGN;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Fencing/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.benk.100days.BetterRest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B5205FBA268FF51E00022CCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Fencing/Preview Content\"";
+				DEVELOPMENT_TEAM = 4DWUZ6JCGN;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Fencing/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.benk.100days.BetterRest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B5205FBC268FF51E00022CCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4DWUZ6JCGN;
+				INFOPLIST_FILE = FencingTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.benk.100days.FencingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fencing.app/Fencing";
+			};
+			name = Debug;
+		};
+		B5205FBD268FF51E00022CCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4DWUZ6JCGN;
+				INFOPLIST_FILE = FencingTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.benk.100days.FencingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fencing.app/Fencing";
+			};
+			name = Release;
+		};
+		B5205FBF268FF51E00022CCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4DWUZ6JCGN;
+				INFOPLIST_FILE = FencingUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.benk.100days.FencingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Fencing;
+			};
+			name = Debug;
+		};
+		B5205FC0268FF51E00022CCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4DWUZ6JCGN;
+				INFOPLIST_FILE = FencingUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.benk.100days.FencingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Fencing;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B5205F89268FF51C00022CCD /* Build configuration list for PBXProject "Fencing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5205FB6268FF51E00022CCD /* Debug */,
+				B5205FB7268FF51E00022CCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5205FB8268FF51E00022CCD /* Build configuration list for PBXNativeTarget "Fencing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5205FB9268FF51E00022CCD /* Debug */,
+				B5205FBA268FF51E00022CCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5205FBB268FF51E00022CCD /* Build configuration list for PBXNativeTarget "FencingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5205FBC268FF51E00022CCD /* Debug */,
+				B5205FBD268FF51E00022CCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5205FBE268FF51E00022CCD /* Build configuration list for PBXNativeTarget "FencingUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5205FBF268FF51E00022CCD /* Debug */,
+				B5205FC0268FF51E00022CCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B5205FC32690361500022CCD /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B5205FC42690361500022CCD /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B5205FC32690361500022CCD /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		B5205F9C268FF51D00022CCD /* Fencing.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B5205F9D268FF51D00022CCD /* Fencing.xcdatamodel */,
+			);
+			currentVersion = B5205F9D268FF51D00022CCD /* Fencing.xcdatamodel */;
+			path = Fencing.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = B5205F86268FF51C00022CCD /* Project object */;
+}

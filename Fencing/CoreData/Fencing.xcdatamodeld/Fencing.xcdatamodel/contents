@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Bout" representedClassName="Bout" syncable="YES">
+        <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="leftScore" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rightScore" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="left" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Fencer" inverseName="leftBouts" inverseEntity="Fencer"/>
+        <relationship name="pool" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pool" inverseName="bouts" inverseEntity="Pool"/>
+        <relationship name="right" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Fencer" inverseName="rightBouts" inverseEntity="Fencer"/>
+    </entity>
+    <entity name="Fencer" representedClassName="Fencer" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="assignedPool" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pool" inverseName="fencers" inverseEntity="Pool"/>
+        <relationship name="leftBouts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bout" inverseName="left" inverseEntity="Bout"/>
+        <relationship name="rightBouts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bout" inverseName="right" inverseEntity="Bout"/>
+    </entity>
+    <entity name="Pool" representedClassName="Pool" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="trackName" optional="YES" attributeType="String"/>
+        <relationship name="bouts" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Bout" inverseName="pool" inverseEntity="Bout"/>
+        <relationship name="fencers" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Fencer" inverseName="assignedPool" inverseEntity="Fencer"/>
+    </entity>
+    <elements>
+        <element name="Bout" positionX="-63" positionY="-18" width="128" height="134"/>
+        <element name="Fencer" positionX="-36" positionY="63" width="128" height="104"/>
+        <element name="Pool" positionX="-63" positionY="0" width="128" height="119"/>
+    </elements>
+</model>
