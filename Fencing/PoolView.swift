@@ -16,67 +16,83 @@ struct PoolView: View {
     
     @State private var info: GridInfo = GridInfo()
     
+    let smallCellSize: CGFloat = 35
+    
     var columns: [GridItem] {
-        var final: [GridItem] = [GridItem(.fixed(100), alignment: .leading)]
+        var final: [GridItem] = [GridItem(.fixed(100), spacing: 0, alignment: .leading)]
         for _ in 0..<pool.uFencers.count {
-            final.append(GridItem(.flexible(maximum: 20), spacing: 10))
+            final.append(GridItem(.fixed(smallCellSize), spacing: 0))
         }
         return final
     }
     
     var body: some View {
         VStack {
-            GeometryReader { geo in
-                LazyVGrid(columns: columns, spacing: 10) {
+            Spacer()
+                .frame(height: 5)
+            
+            VStack {
+                LazyVGrid(columns: columns, spacing: 0) {
                     Text("")
                     ForEach(1...pool.uFencers.count, id: \.self) { i in
-                        Text("\(i)")
-                            .bold()
-                            .font(.system(size: 11))
-                    }
-                    
-                    ForEach(0..<pool.uFencers.count*2-1, id: \.self) { i in
-                        if i%2 == 0 {
-                            let num = i/2
-                            HStack {
-                                Text("\(num+1)")
-                                    .font(.system(size: 11))
-                                    .bold()
-                                Text(pool.uFencers[num].uName)
-                                    //.bold()
-                                    .font(.system(size: 10))
-                                    .lineLimit(1)
-                            }
-                            ForEach(pool.uFencers) { fencer in
-                                if num == fencer.uNumber {
-                                    Text("")
-                                        .font(.system(size: 10))
-                                        .id(UUID())
-                                } else if pool.isTracked(fencer: fencer) {
-                                    Text(pool.getScore(fencer: num, opponent: fencer.uNumber) ?? "")
-                                        .font(.system(size: 10))
-                                        .id(UUID())
-                                } else if pool.isBoutComplete(fencer: num, opponent: fencer.uNumber) {
-                                    Image(systemName: "checkmark")
-                                        .font(.system(size: 10))
-                                        .id(UUID())
-                                } else {
-                                    Text("")
-                                        .font(.system(size: 10))
-                                        .id(UUID())
-                                }
-                            }
-                        } else {
-                            EmptyDivider(left: pool.uFencers.count, geo: geo)
+                        VStack {
+                            Text("\(i)")
+                                .bold()
+                                .font(.system(size: 11))
+                            Spacer()
+                                .frame(height: 3)
                         }
                     }
+                    
+                    
+                    ForEach(0..<pool.uFencers.count, id: \.self) { i in
+                        let num = i
+                        HStack {
+                            Text("\(num+1)")
+                                .font(.system(size: 11))
+                                .bold()
+                            Text(pool.uFencers[num].uName)
+                                //.bold()
+                                .font(.system(size: 10))
+                                .lineLimit(1)
+                            Text("   ")
+                                .font(.system(size: 10))
+                        }
+                        ForEach(pool.uFencers) { fencer in
+                            if num == fencer.uNumber {
+                                Color(.darkGray)
+                                    .font(.system(size: 10))
+                                    .frame(minWidth: smallCellSize+1, minHeight: smallCellSize+1)
+                                    .border(Color.secondary)
+                                    .id(UUID())
+                            } else if pool.isTracked(fencer: fencer) {
+                                Text(pool.getScore(fencer: num, opponent: fencer.uNumber) ?? "")
+                                    .font(.system(size: 10))
+                                    .frame(minWidth: smallCellSize+1, minHeight: smallCellSize+1)
+                                    .border(Color.secondary)
+                                    .id(UUID())
+                            } else if pool.isBoutComplete(fencer: num, opponent: fencer.uNumber) {
+                                Image(systemName: "checkmark")
+                                    .font(.system(size: 10))
+                                    .frame(minWidth: smallCellSize+1, minHeight: smallCellSize+1)
+                                    .border(Color.secondary)
+                                    .id(UUID())
+                            } else {
+                                Text("")
+                                    .font(.system(size: 10))
+                                    .frame(minWidth: smallCellSize+1, minHeight: smallCellSize+1)
+                                    .border(Color.secondary)
+                                    .id(UUID())
+                            }
+                        }
+                        
+                    }
                 }
-                .scaleEffect(0.85 - (CGFloat(pool.uFencers.count - 7) * 0.05))
+                .scaleEffect(0.9 + (CGFloat(pool.uFencers.count - 7) * -0.1))
+                
+                Spacer()
             }
-            .frame(height: 10)
             
-            Spacer()
-                .frame(minHeight: 35)
             Divider()
             
             List {
