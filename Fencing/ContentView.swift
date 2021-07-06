@@ -103,6 +103,12 @@ struct ContentView: View {
             .actionSheet(isPresented: $showingNameSelect) {
                 getNameSheet()
             }
+            /*.onAppear() {
+                for pool in pools {
+                    moc.delete(pool)
+                }
+                try? moc.save()
+            }*/
         }
     }
     

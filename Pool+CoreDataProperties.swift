@@ -22,6 +22,7 @@ extension Pool {
     @NSManaged public var bouts: NSOrderedSet?
     @NSManaged public var fencers: NSOrderedSet?
     @NSManaged public var id: Int16
+    @NSManaged public var currentBout: Int16
     
     public var uName: String {
         return name ?? ""
@@ -33,6 +34,10 @@ extension Pool {
     
     public var uTrackName: String {
         return trackName ?? ""
+    }
+    
+    public var uCurrentBout: Int {
+        return Int(currentBout)
     }
     
     public var uBouts: [Bout] {
@@ -102,6 +107,9 @@ extension Pool {
         }
         return nil
     }
+    func getTracked() -> Fencer? {
+        return self.getFencer(name: uTrackName)
+    }
     func getBout(fencer: Fencer, opponent: Fencer) -> Bout? {
         for bout in uBouts {
             if bout.isFencerIn(fencer) && bout.isFencerIn(opponent) {
@@ -126,6 +134,20 @@ extension Pool {
         return getScore(fencer: f, opponent: o)
     }
     
+    func hasWon(fencer: Fencer, opponent: Fencer) -> Bool {
+        if let bout = getBout(fencer: fencer, opponent: opponent) {
+            return bout.getScore(for: fencer) > bout.getScore(for: opponent)
+        } else {
+            return false
+        }
+    }
+    
+    func hasWon(fencer: Int, opponent: Int) -> Bool {
+        guard let f = self.getFencer(number: fencer) else { return false }
+        guard let o = self.getFencer(number: opponent) else { return false }
+        return hasWon(fencer: f, opponent: o)
+    }
+    
     
     func isBoutComplete(fencer: Int, opponent: Int) -> Bool {
         guard let f = self.getFencer(number: fencer) else { return false }
@@ -137,12 +159,45 @@ extension Pool {
         }
     }
     
+    func isBoutScored(fencer: Int, opponent: Int) -> Bool {
+        guard let f = self.getFencer(number: fencer) else { return false }
+        guard let o = self.getFencer(number: opponent) else { return false }
+        if let bout = getBout(fencer: f, opponent: o) {
+            return bout.hasScore
+        } else {
+            return false
+        }
+    }
+    
     func isTracked(fencer: Fencer) -> Bool {
         if fencer.uName == uTrackName {
             return true
         } else {
             return false
         }
+    }
+    
+    func isBoutTracked(bout: Bout) -> Bool {
+        if bout.uLeft.uName == uTrackName || bout.uRight.uName == uTrackName {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func getCurrentBout() -> Bout {
+        if Int(currentBout) == uBouts.count {
+            let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+            return uBouts.last ?? Bout(context: moc)
+        } else {
+            return uBouts[Int(currentBout)]
+        }
+    }
+    func setCurrentBout(_ to: Int) {
+        currentBout = Int16(to)
+    }
+    func isTableComplete() -> Bool {
+        return Int(currentBout) == uBouts.count
     }
 }
 

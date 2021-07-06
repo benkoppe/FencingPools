@@ -26,6 +26,14 @@
 		B52FA61626910A4300CD5331 /* FormatScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FA61526910A4300CD5331 /* FormatScore.swift */; };
 		B52FA618269170AF00CD5331 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FA617269170AF00CD5331 /* SettingsView.swift */; };
 		B52FA61C2691827700CD5331 /* GridInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FA61B2691827700CD5331 /* GridInfo.swift */; };
+		B52FA6202692AF2C00CD5331 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FA61F2692AF2C00CD5331 /* Colors.swift */; };
+		B52FA6222692BFA100CD5331 /* Zoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FA6212692BFA100CD5331 /* Zoom.swift */; };
+		B52FA6242692C36C00CD5331 /* BracketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FA6232692C36C00CD5331 /* BracketView.swift */; };
+		B52FA6262692DBF600CD5331 /* View-if.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FA6252692DBF600CD5331 /* View-if.swift */; };
+		B52FA62E2693BFE400CD5331 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FA62D2693BFE400CD5331 /* ShareViewController.swift */; };
+		B52FA6312693BFE400CD5331 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B52FA62F2693BFE400CD5331 /* MainInterface.storyboard */; };
+		B52FA6352693BFE400CD5331 /* FencingTimeURL.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B52FA62B2693BFE400CD5331 /* FencingTimeURL.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B52FA63D2693C2B400CD5331 /* ExtensionClass.js in Resources */ = {isa = PBXBuildFile; fileRef = B52FA63C2693C2B400CD5331 /* ExtensionClass.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +51,28 @@
 			remoteGlobalIDString = B5205F8D268FF51C00022CCD;
 			remoteInfo = Fencing;
 		};
+		B52FA6332693BFE400CD5331 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5205F86268FF51C00022CCD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B52FA62A2693BFE400CD5331;
+			remoteInfo = FencingTimeURL;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B52FA6392693BFE400CD5331 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B52FA6352693BFE400CD5331 /* FencingTimeURL.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B5205F8E268FF51C00022CCD /* Fencing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fencing.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +99,15 @@
 		B52FA61526910A4300CD5331 /* FormatScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatScore.swift; sourceTree = "<group>"; };
 		B52FA617269170AF00CD5331 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B52FA61B2691827700CD5331 /* GridInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridInfo.swift; sourceTree = "<group>"; };
+		B52FA61F2692AF2C00CD5331 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		B52FA6212692BFA100CD5331 /* Zoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zoom.swift; sourceTree = "<group>"; };
+		B52FA6232692C36C00CD5331 /* BracketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketView.swift; sourceTree = "<group>"; };
+		B52FA6252692DBF600CD5331 /* View-if.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View-if.swift"; sourceTree = "<group>"; };
+		B52FA62B2693BFE400CD5331 /* FencingTimeURL.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FencingTimeURL.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B52FA62D2693BFE400CD5331 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		B52FA6302693BFE400CD5331 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		B52FA6322693BFE400CD5331 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B52FA63C2693C2B400CD5331 /* ExtensionClass.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ExtensionClass.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +133,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B52FA6282693BFE400CD5331 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -104,6 +149,7 @@
 				B5205F90268FF51C00022CCD /* Fencing */,
 				B5205FA7268FF51E00022CCD /* FencingTests */,
 				B5205FB2268FF51E00022CCD /* FencingUITests */,
+				B52FA62C2693BFE400CD5331 /* FencingTimeURL */,
 				B5205F8F268FF51C00022CCD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -114,6 +160,7 @@
 				B5205F8E268FF51C00022CCD /* Fencing.app */,
 				B5205FA4268FF51E00022CCD /* FencingTests.xctest */,
 				B5205FAF268FF51E00022CCD /* FencingUITests.xctest */,
+				B52FA62B2693BFE400CD5331 /* FencingTimeURL.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -125,6 +172,7 @@
 				B5205F93268FF51C00022CCD /* ContentView.swift */,
 				B52FA617269170AF00CD5331 /* SettingsView.swift */,
 				B5205FDC2690BA5A00022CCD /* PoolView.swift */,
+				B52FA6232692C36C00CD5331 /* BracketView.swift */,
 				B5205F95268FF51D00022CCD /* Assets.xcassets */,
 				B5205F9F268FF51D00022CCD /* Info.plist */,
 				B52FA61226910A0000CD5331 /* Extensions */,
@@ -187,9 +235,23 @@
 			isa = PBXGroup;
 			children = (
 				B52FA61526910A4300CD5331 /* FormatScore.swift */,
+				B52FA6212692BFA100CD5331 /* Zoom.swift */,
+				B52FA61F2692AF2C00CD5331 /* Colors.swift */,
 				B52FA61B2691827700CD5331 /* GridInfo.swift */,
+				B52FA6252692DBF600CD5331 /* View-if.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B52FA62C2693BFE400CD5331 /* FencingTimeURL */ = {
+			isa = PBXGroup;
+			children = (
+				B52FA62D2693BFE400CD5331 /* ShareViewController.swift */,
+				B52FA63C2693C2B400CD5331 /* ExtensionClass.js */,
+				B52FA62F2693BFE400CD5331 /* MainInterface.storyboard */,
+				B52FA6322693BFE400CD5331 /* Info.plist */,
+			);
+			path = FencingTimeURL;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,10 +264,12 @@
 				B5205F8A268FF51C00022CCD /* Sources */,
 				B5205F8B268FF51C00022CCD /* Frameworks */,
 				B5205F8C268FF51C00022CCD /* Resources */,
+				B52FA6392693BFE400CD5331 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B52FA6342693BFE400CD5331 /* PBXTargetDependency */,
 			);
 			name = Fencing;
 			packageProductDependencies = (
@@ -251,6 +315,23 @@
 			productReference = B5205FAF268FF51E00022CCD /* FencingUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		B52FA62A2693BFE400CD5331 /* FencingTimeURL */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B52FA6362693BFE400CD5331 /* Build configuration list for PBXNativeTarget "FencingTimeURL" */;
+			buildPhases = (
+				B52FA6272693BFE400CD5331 /* Sources */,
+				B52FA6282693BFE400CD5331 /* Frameworks */,
+				B52FA6292693BFE400CD5331 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FencingTimeURL;
+			productName = FencingTimeURL;
+			productReference = B52FA62B2693BFE400CD5331 /* FencingTimeURL.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -270,6 +351,9 @@
 					B5205FAE268FF51E00022CCD = {
 						CreatedOnToolsVersion = 12.5;
 						TestTargetID = B5205F8D268FF51C00022CCD;
+					};
+					B52FA62A2693BFE400CD5331 = {
+						CreatedOnToolsVersion = 12.5;
 					};
 				};
 			};
@@ -292,6 +376,7 @@
 				B5205F8D268FF51C00022CCD /* Fencing */,
 				B5205FA3268FF51E00022CCD /* FencingTests */,
 				B5205FAE268FF51E00022CCD /* FencingUITests */,
+				B52FA62A2693BFE400CD5331 /* FencingTimeURL */,
 			);
 		};
 /* End PBXProject section */
@@ -320,6 +405,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B52FA6292693BFE400CD5331 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B52FA6312693BFE400CD5331 /* MainInterface.storyboard in Resources */,
+				B52FA63D2693C2B400CD5331 /* ExtensionClass.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -328,7 +422,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5205F9B268FF51D00022CCD /* Persistence.swift in Sources */,
+				B52FA6202692AF2C00CD5331 /* Colors.swift in Sources */,
 				B5205FE12690E24200022CCD /* Fencer+CoreDataProperties.swift in Sources */,
+				B52FA6242692C36C00CD5331 /* BracketView.swift in Sources */,
 				B5205F94268FF51C00022CCD /* ContentView.swift in Sources */,
 				B5205FD62690AF2200022CCD /* Pool+CoreDataClass.swift in Sources */,
 				B5205FDD2690BA5A00022CCD /* PoolView.swift in Sources */,
@@ -336,7 +432,9 @@
 				B5205FE02690E24200022CCD /* Fencer+CoreDataClass.swift in Sources */,
 				B52FA61626910A4300CD5331 /* FormatScore.swift in Sources */,
 				B5205F9E268FF51D00022CCD /* Fencing.xcdatamodeld in Sources */,
+				B52FA6222692BFA100CD5331 /* Zoom.swift in Sources */,
 				B5205FD42690AF2200022CCD /* Bout+CoreDataClass.swift in Sources */,
+				B52FA6262692DBF600CD5331 /* View-if.swift in Sources */,
 				B5205FD72690AF2200022CCD /* Pool+CoreDataProperties.swift in Sources */,
 				B5205F92268FF51C00022CCD /* FencingApp.swift in Sources */,
 				B5205FD52690AF2200022CCD /* Bout+CoreDataProperties.swift in Sources */,
@@ -360,6 +458,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B52FA6272693BFE400CD5331 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B52FA62E2693BFE400CD5331 /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -373,7 +479,23 @@
 			target = B5205F8D268FF51C00022CCD /* Fencing */;
 			targetProxy = B5205FB0268FF51E00022CCD /* PBXContainerItemProxy */;
 		};
+		B52FA6342693BFE400CD5331 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B52FA62A2693BFE400CD5331 /* FencingTimeURL */;
+			targetProxy = B52FA6332693BFE400CD5331 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B52FA62F2693BFE400CD5331 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B52FA6302693BFE400CD5331 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		B5205FB6268FF51E00022CCD /* Debug */ = {
@@ -495,6 +617,7 @@
 		B5205FB9268FF51E00022CCD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -507,7 +630,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.benk.100days.BetterRest;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.benk.flagguess.Guess-the-Flag";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -517,6 +640,7 @@
 		B5205FBA268FF51E00022CCD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -529,7 +653,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.benk.100days.BetterRest;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.benk.flagguess.Guess-the-Flag";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -620,6 +744,44 @@
 			};
 			name = Release;
 		};
+		B52FA6372693BFE400CD5331 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4DWUZ6JCGN;
+				INFOPLIST_FILE = FencingTimeURL/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.benk.flagguess.Guess-the-Flag.FencingTimeURL";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B52FA6382693BFE400CD5331 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4DWUZ6JCGN;
+				INFOPLIST_FILE = FencingTimeURL/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.benk.flagguess.Guess-the-Flag.FencingTimeURL";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -655,6 +817,15 @@
 			buildConfigurations = (
 				B5205FBF268FF51E00022CCD /* Debug */,
 				B5205FC0268FF51E00022CCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B52FA6362693BFE400CD5331 /* Build configuration list for PBXNativeTarget "FencingTimeURL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B52FA6372693BFE400CD5331 /* Debug */,
+				B52FA6382693BFE400CD5331 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -22,6 +22,7 @@ extension Bout {
     @NSManaged public var pool: Pool?
     
     @NSManaged public var isCompleted: Bool
+    @NSManaged public var hasScore: Bool
     @NSManaged public var leftScore: Int16
     @NSManaged public var rightScore: Int16
     
@@ -62,6 +63,16 @@ extension Bout {
         }
     }
     
+    func getOpponent(_ fencer: Fencer) -> Fencer? {
+        if fencer == uLeft {
+            return uRight
+        } else if fencer == uRight {
+            return uLeft
+        } else {
+            return nil
+        }
+    }
+    
     func getScore(for fencer: Fencer) -> Int {
         if fencer == uLeft {
             return uLeftScore
@@ -71,6 +82,16 @@ extension Bout {
             return -1
         }
     }
+    
+    func setScore(for fencer: Fencer, score: Int) {
+        if fencer == uLeft {
+            leftScore = Int16(score)
+        } else if fencer == uRight {
+            rightScore = Int16(score)
+        }
+    }
+    
+    
 }
 
 extension Bout {
