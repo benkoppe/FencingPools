@@ -40,6 +40,7 @@
 		B575CD342697595400E8D748 /* UITextField-Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD332697595400E8D748 /* UITextField-Toolbar.swift */; };
 		B575CD362698E63E00E8D748 /* BracketOfEight.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD352698E63E00E8D748 /* BracketOfEight.swift */; };
 		B575CD3B26996C0200E8D748 /* DE Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD3A26996C0200E8D748 /* DE Orders.swift */; };
+		B575CD3D2699ED9600E8D748 /* BracketOfSixteen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD3C2699ED9600E8D748 /* BracketOfSixteen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 		B575CD332697595400E8D748 /* UITextField-Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField-Toolbar.swift"; sourceTree = "<group>"; };
 		B575CD352698E63E00E8D748 /* BracketOfEight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketOfEight.swift; sourceTree = "<group>"; };
 		B575CD3A26996C0200E8D748 /* DE Orders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DE Orders.swift"; sourceTree = "<group>"; };
+		B575CD3C2699ED9600E8D748 /* BracketOfSixteen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketOfSixteen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +190,7 @@
 				B52FA6232692C36C00CD5331 /* BracketView.swift */,
 				B575CD3A26996C0200E8D748 /* DE Orders.swift */,
 				B575CD352698E63E00E8D748 /* BracketOfEight.swift */,
+				B575CD3C2699ED9600E8D748 /* BracketOfSixteen.swift */,
 				B5205F95268FF51D00022CCD /* Assets.xcassets */,
 				B5205F9F268FF51D00022CCD /* Info.plist */,
 				B52FA61226910A0000CD5331 /* Extensions */,
@@ -441,6 +444,7 @@
 			files = (
 				B5205F9B268FF51D00022CCD /* Persistence.swift in Sources */,
 				B52FA6202692AF2C00CD5331 /* Colors.swift in Sources */,
+				B575CD3D2699ED9600E8D748 /* BracketOfSixteen.swift in Sources */,
 				B5205FE12690E24200022CCD /* Fencer+CoreDataProperties.swift in Sources */,
 				B575CD362698E63E00E8D748 /* BracketOfEight.swift in Sources */,
 				B52FA6242692C36C00CD5331 /* BracketView.swift in Sources */,

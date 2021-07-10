@@ -16,7 +16,7 @@ struct BracketView: View {
     
     let webView = WKWebView()
     @State private var fencers: [Fencer?] = []
-    
+    @State private var sortedFencers: [Fencer?] = []
     @State private var enteredText = ""
     
     var otherNum: Int {
@@ -39,13 +39,32 @@ struct BracketView: View {
         Button("Sort Data") {
             sortFencers()
         }
-        .onAppear() { print(order256.count )}
     }
     
     func sortFencers() {
         fillByes()
+        var boutOrder: [Int] = []
         
+        switch fencers.count {
+        case 256:
+            boutOrder = order256
+        case 128:
+            boutOrder = order128
+        case 64:
+            boutOrder = order64
+        case 32:
+            boutOrder = order32
+        case 16:
+            boutOrder = order16
+        case 8:
+            boutOrder = order8
+        default:
+            return
+        }
         
+        for bout in boutOrder {
+            sortedFencers.append(fencers[bout])
+        }
     }
     
     func fillByes() {
