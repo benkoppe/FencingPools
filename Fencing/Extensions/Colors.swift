@@ -27,6 +27,7 @@ public extension Color {
     static let tertiaryGroupedBackground = Color(UIColor.tertiarySystemGroupedBackground)
     
     static let teal = Color(UIColor.systemTeal)
+    //static let teal = Color("TrackedColor")
     
     
 

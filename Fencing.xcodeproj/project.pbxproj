@@ -34,6 +34,12 @@
 		B52FA6312693BFE400CD5331 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B52FA62F2693BFE400CD5331 /* MainInterface.storyboard */; };
 		B52FA6352693BFE400CD5331 /* FencingTimeURL.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B52FA62B2693BFE400CD5331 /* FencingTimeURL.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B52FA63D2693C2B400CD5331 /* ExtensionClass.js in Resources */ = {isa = PBXBuildFile; fileRef = B52FA63C2693C2B400CD5331 /* ExtensionClass.js */; };
+		B5367C8C26955B1300A3C12E /* Color-AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5367C8B26955B1300A3C12E /* Color-AppStorage.swift */; };
+		B5367C8E26955ECC00A3C12E /* PoolInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5367C8D26955ECC00A3C12E /* PoolInfo.swift */; };
+		B575CD322697576200E8D748 /* String-substring.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD312697576200E8D748 /* String-substring.swift */; };
+		B575CD342697595400E8D748 /* UITextField-Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD332697595400E8D748 /* UITextField-Toolbar.swift */; };
+		B575CD362698E63E00E8D748 /* BracketOfEight.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD352698E63E00E8D748 /* BracketOfEight.swift */; };
+		B575CD3B26996C0200E8D748 /* DE Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD3A26996C0200E8D748 /* DE Orders.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +114,12 @@
 		B52FA6302693BFE400CD5331 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		B52FA6322693BFE400CD5331 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B52FA63C2693C2B400CD5331 /* ExtensionClass.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ExtensionClass.js; sourceTree = "<group>"; };
+		B5367C8B26955B1300A3C12E /* Color-AppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color-AppStorage.swift"; sourceTree = "<group>"; };
+		B5367C8D26955ECC00A3C12E /* PoolInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoolInfo.swift; sourceTree = "<group>"; };
+		B575CD312697576200E8D748 /* String-substring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-substring.swift"; sourceTree = "<group>"; };
+		B575CD332697595400E8D748 /* UITextField-Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField-Toolbar.swift"; sourceTree = "<group>"; };
+		B575CD352698E63E00E8D748 /* BracketOfEight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketOfEight.swift; sourceTree = "<group>"; };
+		B575CD3A26996C0200E8D748 /* DE Orders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DE Orders.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,7 +184,10 @@
 				B5205F93268FF51C00022CCD /* ContentView.swift */,
 				B52FA617269170AF00CD5331 /* SettingsView.swift */,
 				B5205FDC2690BA5A00022CCD /* PoolView.swift */,
+				B5367C8D26955ECC00A3C12E /* PoolInfo.swift */,
 				B52FA6232692C36C00CD5331 /* BracketView.swift */,
+				B575CD3A26996C0200E8D748 /* DE Orders.swift */,
+				B575CD352698E63E00E8D748 /* BracketOfEight.swift */,
 				B5205F95268FF51D00022CCD /* Assets.xcassets */,
 				B5205F9F268FF51D00022CCD /* Info.plist */,
 				B52FA61226910A0000CD5331 /* Extensions */,
@@ -235,10 +250,13 @@
 			isa = PBXGroup;
 			children = (
 				B52FA61526910A4300CD5331 /* FormatScore.swift */,
+				B575CD332697595400E8D748 /* UITextField-Toolbar.swift */,
+				B575CD312697576200E8D748 /* String-substring.swift */,
 				B52FA6212692BFA100CD5331 /* Zoom.swift */,
 				B52FA61F2692AF2C00CD5331 /* Colors.swift */,
 				B52FA61B2691827700CD5331 /* GridInfo.swift */,
 				B52FA6252692DBF600CD5331 /* View-if.swift */,
+				B5367C8B26955B1300A3C12E /* Color-AppStorage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -424,21 +442,27 @@
 				B5205F9B268FF51D00022CCD /* Persistence.swift in Sources */,
 				B52FA6202692AF2C00CD5331 /* Colors.swift in Sources */,
 				B5205FE12690E24200022CCD /* Fencer+CoreDataProperties.swift in Sources */,
+				B575CD362698E63E00E8D748 /* BracketOfEight.swift in Sources */,
 				B52FA6242692C36C00CD5331 /* BracketView.swift in Sources */,
 				B5205F94268FF51C00022CCD /* ContentView.swift in Sources */,
+				B5367C8C26955B1300A3C12E /* Color-AppStorage.swift in Sources */,
 				B5205FD62690AF2200022CCD /* Pool+CoreDataClass.swift in Sources */,
 				B5205FDD2690BA5A00022CCD /* PoolView.swift in Sources */,
 				B52FA61C2691827700CD5331 /* GridInfo.swift in Sources */,
+				B575CD3B26996C0200E8D748 /* DE Orders.swift in Sources */,
 				B5205FE02690E24200022CCD /* Fencer+CoreDataClass.swift in Sources */,
 				B52FA61626910A4300CD5331 /* FormatScore.swift in Sources */,
 				B5205F9E268FF51D00022CCD /* Fencing.xcdatamodeld in Sources */,
 				B52FA6222692BFA100CD5331 /* Zoom.swift in Sources */,
 				B5205FD42690AF2200022CCD /* Bout+CoreDataClass.swift in Sources */,
 				B52FA6262692DBF600CD5331 /* View-if.swift in Sources */,
+				B5367C8E26955ECC00A3C12E /* PoolInfo.swift in Sources */,
 				B5205FD72690AF2200022CCD /* Pool+CoreDataProperties.swift in Sources */,
 				B5205F92268FF51C00022CCD /* FencingApp.swift in Sources */,
 				B5205FD52690AF2200022CCD /* Bout+CoreDataProperties.swift in Sources */,
 				B52FA618269170AF00CD5331 /* SettingsView.swift in Sources */,
+				B575CD322697576200E8D748 /* String-substring.swift in Sources */,
+				B575CD342697595400E8D748 /* UITextField-Toolbar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

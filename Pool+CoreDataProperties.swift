@@ -17,6 +17,7 @@ extension Pool {
     }
 
     @NSManaged public var name: String?
+    @NSManaged public var defaultName: String?
     @NSManaged public var date: String?
     @NSManaged public var trackName: String?
     @NSManaged public var bouts: NSOrderedSet?
@@ -26,6 +27,10 @@ extension Pool {
     
     public var uName: String {
         return name ?? ""
+    }
+    
+    public var uDefaultName: String {
+        return defaultName ?? ""
     }
     
     public var uDate: String {
@@ -199,6 +204,10 @@ extension Pool {
     func isTableComplete() -> Bool {
         return Int(currentBout) == uBouts.count
     }
+    
+    func isNameDefault() -> Bool {
+        return uDefaultName == uName
+    }
 }
 
 extension Pool {
@@ -206,6 +215,7 @@ extension Pool {
         self.init(context: context)
         
         self.name = name
+        self.defaultName = name
         self.date = date
         self.id = Int16(number)
         
@@ -230,6 +240,7 @@ extension Pool {
         self.init(context: context)
         
         self.name = name
+        self.defaultName = name
         self.date = "December 1, 2020"
         self.id = Int16(1)
         

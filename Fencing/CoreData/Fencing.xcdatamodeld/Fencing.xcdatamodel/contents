@@ -13,6 +13,7 @@
     <entity name="Fencer" representedClassName="Fencer" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="placement" optional="YES" attributeType="String"/>
         <relationship name="assignedPool" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pool" inverseName="fencers" inverseEntity="Pool"/>
         <relationship name="leftBouts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bout" inverseName="left" inverseEntity="Bout"/>
         <relationship name="rightBouts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bout" inverseName="right" inverseEntity="Bout"/>
@@ -20,6 +21,7 @@
     <entity name="Pool" representedClassName="Pool" syncable="YES">
         <attribute name="currentBout" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="defaultName" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="trackName" optional="YES" attributeType="String"/>
@@ -28,7 +30,7 @@
     </entity>
     <elements>
         <element name="Bout" positionX="-63" positionY="-18" width="128" height="149"/>
-        <element name="Fencer" positionX="-36" positionY="63" width="128" height="104"/>
-        <element name="Pool" positionX="-63" positionY="0" width="128" height="134"/>
+        <element name="Fencer" positionX="-36" positionY="63" width="128" height="119"/>
+        <element name="Pool" positionX="-63" positionY="0" width="128" height="149"/>
     </elements>
 </model>

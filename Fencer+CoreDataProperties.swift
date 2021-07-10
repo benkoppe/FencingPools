@@ -18,6 +18,7 @@ extension Fencer {
 
     @NSManaged public var name: String?
     @NSManaged public var number: Int16
+    @NSManaged public var placement: String?
     @NSManaged public var assignedPool: Pool?
     @NSManaged public var leftBouts: NSSet?
     @NSManaged public var rightBouts: NSSet?
@@ -28,6 +29,10 @@ extension Fencer {
     
     public var uNumber: Int {
         return Int(number)
+    }
+    
+    public var uPlacement: String {
+        return placement ?? ""
     }
 
 }
@@ -82,5 +87,11 @@ extension Fencer {
         
         self.name = name
         self.number = Int16(number)
+    }
+    convenience init(name: String, placement: String, context: NSManagedObjectContext) {
+        self.init(context: context)
+        
+        self.name = name
+        self.placement = placement
     }
 }

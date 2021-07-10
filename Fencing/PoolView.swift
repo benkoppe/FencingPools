@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 import CoreData
 import PopupView
 
@@ -23,6 +24,8 @@ struct PoolView: View {
     @State private var opponentScore = ""
     
     @State private var showingScoreAlert = false
+    
+    @State private var showingInfo = false
     
     let smallCellSize: CGFloat = 35
     
@@ -66,7 +69,17 @@ struct PoolView: View {
                 } // end of reader
             }
         }
+        .environmentObject(pool)
         .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle(pool.uName)
+        /*.navigationBarItems(trailing: Button(action: {
+            showingInfo = true
+        }) {
+            Image(systemName: "info.circle")
+        })*/
+        .fullScreenCover(isPresented: $showingInfo) {
+            PoolInfo(pool: pool)
+        }
     }
     
     struct scoreTable: View {
@@ -98,13 +111,13 @@ struct PoolView: View {
                         fencerRow(pool: pool, num: i)
                         
                         ForEach(pool.uFencers) { fencer in
-                            if i == fencer.uNumber {
-                                
-                                Color(.darkGray)
-                                    .celll(size: smallCellSize, isTracked: false)
-                                
-                            } else if pool.isTracked(fencer: fencer) || pool.isTracked(fencer: pool.uFencers[i]) {
-                                if pool.isBoutScored(fencer: i, opponent: fencer.uNumber) {
+                            
+                            if pool.isTracked(fencer: fencer) || pool.isTracked(fencer: pool.uFencers[i]) {
+                                if i == fencer.uNumber {
+                                    
+                                    fencerCell(type: .trackedSelf, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
+                                    
+                                } else if pool.isBoutScored(fencer: i, opponent: fencer.uNumber) {
                                     
                                     fencerCell(type: .trackedScore, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
                                     
@@ -117,14 +130,21 @@ struct PoolView: View {
                                     fencerCell(type: .trackedNoScore, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
                                     
                                 }
-                            } else if pool.isBoutComplete(fencer: i, opponent: fencer.uNumber) {
+                            } else  {
                                 
-                                fencerCell(type: .untrackedCompleted, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
-                                
-                            } else {
-                                
-                                fencerCell(type: .untrackedNoScore, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
-                                
+                                if i == fencer.uNumber {
+                                    
+                                    fencerCell(type: .untrackedSelf, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
+                                    
+                                } else if pool.isBoutComplete(fencer: i, opponent: fencer.uNumber) {
+                                    
+                                    fencerCell(type: .untrackedCompleted, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
+                                    
+                                } else {
+                                    
+                                    fencerCell(type: .untrackedNoScore, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
+                                    
+                                }
                             }
                         }
                         
@@ -170,12 +190,19 @@ struct PoolView: View {
         let cellSize: CGFloat
         
         enum cellTypes {
-            case untrackedNoScore, untrackedCompleted, untrackedScore, trackedNoScore, trackedCompleted, trackedScore
+            case untrackedSelf, untrackedNoScore, untrackedCompleted, untrackedScore, trackedSelf, trackedNoScore, trackedCompleted, trackedScore
         } // Types of cells
         
         var body: some View {
             switch type {
             
+            case .untrackedSelf:
+                Color(.darkGray)
+                    .celll(size: cellSize, isTracked: false)
+            case .trackedSelf:
+                Color(.darkGray)
+                    .celll(size: cellSize, isTracked: true)
+                
             case .untrackedNoScore:
                 Color(.clear)
                     .celll(size: cellSize, isTracked: false)
@@ -209,48 +236,68 @@ struct PoolView: View {
         @Binding var showingEditScore: Bool
         @Binding var showingScoreAlert: Bool
         
+        @EnvironmentObject var pool: Pool
         @ObservedObject var bout: Bout
         @ObservedObject var tracked: Fencer
         @ObservedObject var opponent: Fencer
         
+        @State private var showingIssueAlert = false
+        
+        @State private var yourScoreInt = 0
+        @State private var opponentScoreInt = 0
+        @State private var scoreIssue: ScoreIssueType = .none
+        
+        var scoreIssueAlert: String {
+            switch scoreIssue {
+            case .you:
+                return "Your score was higher than 5. Continue anyways?"
+            case .opponent:
+                return "Your opponent's score was higher than 5. Continue anyways?"
+            case .all:
+                return "Your and your opponent's scores were higher than 5. Continue anyways?"
+            case .none:
+                return ""
+            }
+        }
         
         var body: some View {
             VStack {
                 HStack {
                     Spacer()
-                    TextField("You", text: $yourScore)
+                    TextFieldContainer("You", text: $yourScore, alignment: .right)
+                        .frame(width: 120, height: 10)
+                    /*TextField("You", text: $yourScore)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.numberPad)
                         .frame(width: 100)
-                        .multilineTextAlignment(.trailing)
+                        .multilineTextAlignment(.trailing)*/
                     Spacer()
                     Text("-")
                         .font(.title)
                     Spacer()
-                    TextField(opponent.uName, text: $opponentScore)
+                    TextFieldContainer("\(opponent.uName[0..<12])", text: $opponentScore, alignment: .left)
+                        .frame(width: 120, height: 10)
+                    /*TextField(opponent.uName, text: $opponentScore)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.numberPad)
-                        .frame(width: 100)
+                        .frame(width: 100)*/
                     Spacer()
                 }
                 .padding()
                 
                 HStack {
                     Button(action: {
-                        if let yourScore = Int(yourScore), let opponentScore = Int(opponentScore) {
-                            withAnimation { showingEditScore = false }
-                            bout.hasScore = true
-                            bout.setScore(for: tracked, score: yourScore)
-                            bout.setScore(for: opponent, score: opponentScore)
-                            self.yourScore = ""; self.opponentScore = ""
-                            try? moc.save()
-                        } else {
-                            showingScoreAlert = false
+                        if let yourScoreInt = Int(yourScore), let opponentScoreInt = Int(opponentScore) {
+                            self.yourScoreInt = yourScoreInt
+                            self.opponentScoreInt = opponentScoreInt
+                            checkScores()
                         }
                     }) {
                         Text("Done")
                             .padding(.horizontal)
                     }
+                    .disabled(!isStringInt(yourScore) || !isStringInt(opponentScore))
+                    .disabled(yourScore.isEmpty || opponentScore.isEmpty)
                     
                     Spacer().frame(width: 35)
                     
@@ -264,7 +311,123 @@ struct PoolView: View {
                     .foregroundColor(.red)
                 }
             }
+            .alert(isPresented: $showingIssueAlert) {
+                Alert(title: Text("Score too high"), message: Text(scoreIssueAlert), primaryButton: .destructive(Text("No"), action: { clearScores(scoreIssue) }), secondaryButton: .default(Text("Yes"), action: { setScores() }))
+            }
         }
+        
+        struct TextFieldContainer: UIViewRepresentable {
+            private var placeholder : String
+            private var text : Binding<String>
+            private var alignment: NSTextAlignment
+
+            init(_ placeholder:String, text:Binding<String>, alignment: NSTextAlignment) {
+                self.placeholder = placeholder
+                self.text = text
+                self.alignment = alignment
+            }
+
+            func makeCoordinator() -> TextFieldContainer.Coordinator {
+                Coordinator(self)
+            }
+
+            func makeUIView(context: UIViewRepresentableContext<TextFieldContainer>) -> UITextField {
+
+                let innertTextField = UITextField()
+                innertTextField.placeholder = placeholder
+                innertTextField.text = text.wrappedValue
+                innertTextField.borderStyle = .roundedRect
+                innertTextField.textAlignment = alignment
+                innertTextField.keyboardType = .numberPad
+                innertTextField.delegate = context.coordinator
+                
+                context.coordinator.setup(innertTextField)
+
+                return innertTextField
+            }
+
+            func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<TextFieldContainer>) {
+                uiView.text = self.text.wrappedValue
+            }
+
+            class Coordinator: NSObject, UITextFieldDelegate {
+                var parent: TextFieldContainer
+
+                init(_ textFieldContainer: TextFieldContainer) {
+                    self.parent = textFieldContainer
+                }
+
+                func setup(_ textField:UITextField) {
+                    textField.addTarget(self, action: #selector(textFieldDidBeginEditing), for: .editingDidBegin)
+                }
+                
+                @objc func textFieldDidBeginEditing(_ textField: UITextField) {
+                    DispatchQueue.main.async {
+                        let newPosition = textField.endOfDocument
+                        textField.selectedTextRange = textField.textRange(from: newPosition, to: newPosition)
+                    }
+                }
+            }
+        }
+        
+        func isStringInt(_ str: String) -> Bool {
+            if let _ = Int(str) {
+                return true
+            } else {
+                return false
+            }
+        }
+        
+        enum ScoreIssueType {
+            case none, you, opponent, all
+        }
+        
+        func clearScores(_ type: ScoreIssueType) {
+            switch type {
+            
+            case .you:
+                yourScoreInt = 0
+                yourScore = ""
+            case .opponent:
+                opponentScoreInt = 0
+                opponentScore = ""
+            case .all:
+                yourScoreInt = 0
+                yourScore = ""
+                opponentScoreInt = 0
+                opponentScore = ""
+            case .none:
+                return
+            }
+        }
+        
+        func checkScores() {
+            if yourScoreInt > 5 && opponentScoreInt > 5 {
+                scoreIssue = .all
+                showingIssueAlert = true
+            } else if yourScoreInt > 5 {
+                scoreIssue = .you
+                showingIssueAlert = true
+            } else if opponentScoreInt > 5 {
+                scoreIssue = .opponent
+                showingIssueAlert = true
+            } else {
+                scoreIssue = .none
+                setScores()
+            }
+        }
+        
+        func setScores() {
+            withAnimation { showingEditScore = false }
+            pool.objectWillChange.send()
+            bout.hasScore = true
+            bout.setScore(for: tracked, score: yourScoreInt)
+            bout.setScore(for: opponent, score: opponentScoreInt)
+            self.yourScore = ""; self.opponentScore = ""
+            try? moc.save()
+        }
+        
+        
     } // Edit bout score
     
     
@@ -311,46 +474,143 @@ struct PoolView: View {
         @Binding var scoreBout: Bout?
         @Binding var showingEditScore: Bool
         
+        var centerText: Text {
+            if let tracked = pool.getTracked(), let opponent = bout.getOpponent(tracked) {
+                if bout.hasScore, let score = pool.getScore(fencer: tracked, opponent: opponent) {
+                    return Text(score)
+                        .foregroundColor(pool.hasWon(fencer: tracked, opponent: opponent) ? .green : .red)
+                } else if bout.isCompleted {
+                    return Text("\(Image(systemName: "checkmark"))")
+                        .foregroundColor(.primary)
+                } else {
+                    return Text("-")
+                        .foregroundColor(.primary)
+                }
+            } else {
+                if bout.isCompleted {
+                    return Text("\(Image(systemName: "checkmark"))")
+                        .foregroundColor(.secondaryLabel)
+                } else {
+                    return Text("-")
+                        .foregroundColor(.secondaryLabel)
+                }
+            }
+        }
+        
         var body: some View {
             Group {
-                Menu {
-                    if pool.isBoutTracked(bout: bout) {
-                        Button(action: {
-                            yourScore = ""; opponentScore = ""
-                            scoreBout = bout
-                            withAnimation { showingEditScore = true }
-                        }) {
-                            Image(systemName: "pencil")
-                            Text("Input Score")
+                HStack {
+                    Text("\(bout.uLeft.uNumber+1)")
+                        .foregroundColor(!pool.isTracked(fencer: bout.uLeft) ? .primary : Color.teal)
+                    Text(bout.uLeft.uName)
+                        .font(.caption)
+                        .foregroundColor(!pool.isTracked(fencer: bout.uLeft) ? .secondary : Color.teal)
+                        .if(pool.isTracked(fencer: bout.uLeft)) { view in
+                            view.opacity(0.65)
                         }
+                        .lineLimit(1)
+                        .frame(width: 120, alignment: .leading)
+                    Spacer()
+                    
+                    /*centerText
+                        .font(.caption)*/
+                    
+                    Spacer()
+                    Text(bout.uRight.uName)
+                        .font(.caption)
+                        .foregroundColor(!pool.isTracked(fencer: bout.uRight) ? .secondary : Color.teal)
+                        .if(pool.isTracked(fencer: bout.uRight)) { view in
+                            view.opacity(0.65)
+                        }
+                        .lineLimit(1)
+                        .frame(width: 120, alignment: .trailing)
+                    Text("\(bout.uRight.uNumber+1)")
+                        .foregroundColor(!pool.isTracked(fencer: bout.uRight) ? .primary : Color.teal)
+                }
+                .contextMenu {
+                    
+                    if pool.getCurrentBout() != bout {
+                        jumpToBoutButton(pool: pool, bout: bout)
                     }
-                    Button(action: {
-                        pool.objectWillChange.send()
-                        bout.isCompleted = true
-                        try? moc.save()
-                    }) {
-                        Image(systemName: "checkmark")
-                        Text("Mark as Done")
-                    }
-                } label: {
-                    HStack {
-                        Text("\(bout.uLeft.uNumber+1)")
-                            .foregroundColor(!pool.isTracked(fencer: bout.uLeft) ? .primary : Color.teal)
-                        Text(bout.uLeft.uName)
-                            .font(.caption)
-                            .foregroundColor(!pool.isTracked(fencer: bout.uLeft) ? .secondary : Color.teal)
-                        Spacer()
-                        Text(bout.uRight.uName)
-                            .font(.caption)
-                            .foregroundColor(!pool.isTracked(fencer: bout.uRight) ? .secondary : Color.teal)
-                        Text("\(bout.uRight.uNumber+1)")
-                            .foregroundColor(!pool.isTracked(fencer: bout.uRight) ? .primary : Color.teal)
+                    
+                    if pool.isBoutTracked(bout: bout) {
+                        Section {
+                            editBoutButtons(pool: pool, bout: bout, yourScore: $yourScore, opponentScore: $opponentScore, scoreBout: $scoreBout, showingEditScore: $showingEditScore)
+                        }
                     }
                 }
             }
             .id(bout)
             .listRowBackground((!pool.isTableComplete() && pool.getCurrentBout() == bout) ? Color.tertiaryGroupedBackground : Color.secondaryGroupedBackground)
         }
+        
+        struct jumpToBoutButton: View {
+            @Environment(\.managedObjectContext) private var moc
+            
+            @ObservedObject var pool: Pool
+            @ObservedObject var bout: Bout
+            
+            var body: some View {
+                Button(action: {
+                    jumpToBout(bout: bout)
+                    try? moc.save()
+                }) {
+                    if pool.uCurrentBout > bout.num {
+                        Image(systemName: "arrow.up.circle")
+                    } else {
+                        Image(systemName: "arrow.down.circle")
+                    }
+                    Text("Jump to Bout")
+                }
+            }
+            
+            func jumpToBout(bout: Bout) {
+                if bout.num > pool.uCurrentBout {
+                    for boutNum in pool.uCurrentBout ..< bout.num {
+                        pool.uBouts[boutNum].isCompleted = true
+                    }
+                    pool.setCurrentBout(bout.num)
+                } else if bout.num < pool.uCurrentBout {
+                    for boutNum in bout.num ..< pool.uCurrentBout {
+                        pool.uBouts[boutNum].isCompleted = false
+                    }
+                    pool.setCurrentBout(bout.num)
+                }
+            }
+        } // Jumps to selected bout
+        
+        struct editBoutButtons: View {
+            @ObservedObject var pool: Pool
+            @ObservedObject var bout: Bout
+            
+            @Binding var yourScore: String
+            @Binding var opponentScore: String
+            @Binding var scoreBout: Bout?
+            @Binding var showingEditScore: Bool
+            
+            var body: some View {
+                if pool.isBoutTracked(bout: bout) {
+                    Button(action: {
+                        yourScore = ""; opponentScore = ""
+                        scoreBout = bout
+                        withAnimation { showingEditScore = true }
+                    }) {
+                        Image(systemName: "square.and.pencil")
+                        Text("Input Score")
+                    }
+                    
+                    if showingEditScore == true && scoreBout == bout {
+                        Button(action: {
+                            withAnimation { showingEditScore = false }
+                        }) {
+                            Image(systemName: "pencil.slash")
+                            Text("Cancel Input")
+                        }
+                    }
+                }
+            }
+        } // Edit bout
+        
     } // Each item in bout list
     
     
@@ -429,6 +689,7 @@ struct PoolView: View {
                         pool.uBouts[boutNum].isCompleted = false
                     }
                     pool.currentBout = 0
+                    try? moc.save()
                     withAnimation { proxy.scrollTo(pool.getCurrentBout()) }
                 } label: {
                     Label("Jump to start", systemImage: "backward.fill")
@@ -467,7 +728,7 @@ struct PoolView: View {
                     for boutNum in 0..<Int(pool.currentBout) {
                         pool.uBouts[boutNum].isCompleted = true
                     }
-                    
+                    try? moc.save()
                     withAnimation { proxy.scrollTo(pool.getCurrentBout()) }
                 } label: {
                     Label("Jump to end", systemImage: "forward.fill")
@@ -493,6 +754,7 @@ struct PoolView: View {
                 Image(systemName: "square.and.pencil")
                     .padding([.horizontal, .bottom])
             }
+            .disabled(!pool.isBoutTracked(bout: pool.getCurrentBout()))
         }
     } // Edit score toolbar button
 }
