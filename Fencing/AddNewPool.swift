@@ -11,13 +11,13 @@ import WebKit
 struct AddNewPool: View {
     @Environment(\.managedObjectContext) private var moc
     
-    let pools: FetchedResults<Pool>
+    @FetchRequest(entity: Pool.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Pool.id, ascending: true)]) private var pools: FetchedResults<Pool>
+    @Binding var isLoading: Bool
     
     @AppStorage("slowMode") var slowMode = false
     @AppStorage("defaultName") var defaultName = ""
     
     let webView = WKWebView()
-    @State private var isLoading = false
     @State private var showingAddNew = false
     @State private var bouts: [String] = []
     @State private var fencers: [String] = []
@@ -30,30 +30,31 @@ struct AddNewPool: View {
     
     var body: some View {
         Group {
-            if !defaultName.isEmpty {
-                Toggle("Use default name", isOn: $useDefaultName)
+            Button("New Pool") {
+                withAnimation { showingAddNew.toggle(); useDefaultName = false }
             }
             
-            HStack {
-                TextField("Pool URL ", text: $url)
-                Button(action: {
-                    fetchNewData(url: url)
-                    showingAddNew = false
-                    url = ""
-                }) {
-                    Image(systemName: "plus")
+            if showingAddNew {
+                Group {
+                    if !defaultName.isEmpty {
+                        Toggle("Use default name", isOn: $useDefaultName)
+                    }
+                    
+                    HStack {
+                        TextField("Pool URL ", text: $url)
+                        Button(action: {
+                            fetchNewData(url: url)
+                            showingAddNew = false
+                            url = ""
+                        }) {
+                            Image(systemName: "plus")
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .foregroundColor(url.isEmpty ? .gray: .blue)
+                        .disabled(url.isEmpty)
+                    }
                 }
-                .buttonStyle(PlainButtonStyle())
-                .foregroundColor(url.isEmpty ? .gray: .blue)
-                .disabled(url.isEmpty)
             }
-        }
-        .popup(isPresented: $isLoading, position: .top) {
-            Text("Loading...")
-                .foregroundColor(.black)
-                .frame(width: 200, height: 60)
-                .background(Color(.lightGray))
-                .cornerRadius(30.0)
         }
         .actionSheet(isPresented: $showingNameSelect) {
             getNameSheet()

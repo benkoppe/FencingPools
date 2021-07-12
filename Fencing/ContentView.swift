@@ -30,6 +30,10 @@ struct ContentView: View {
     
     @State private var showingNameSelect = false
     
+    @State private var isDeleting = false
+    @State private var showingWarning = false
+    @State private var deleteItem: Pool?
+    
     var body: some View {
         NavigationView {
             Form {
@@ -38,15 +42,27 @@ struct ContentView: View {
                         ForEach(pools) { pool in
                             PoolListItem(pool: pool)
                         }
+                        .onDelete(perform: delete)
                     } else {
                         EmptyPool()
                     }
+                }
+                .alert(isPresented: $showingWarning) {
+                    Alert(title: Text("Delete \(deleteItem?.uName ?? "")"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
+                        try? moc.save()
+                        self.isDeleting = false
+                    }, secondaryButton: .cancel() {
+                        if let pool = deleteItem {
+                            self.readdPool(pool: pool)
+                        }
+                        self.isDeleting = false
+                    })
                 }
                 
                 Section {
                     Button("New Pool") {
                         withAnimation { showingAddNew.toggle(); useDefaultName = false }
-                        }
+                    }
                     
                     if showingAddNew {
                         Group {
@@ -70,6 +86,9 @@ struct ContentView: View {
                         }
                     }
                 }
+                .actionSheet(isPresented: $showingNameSelect) {
+                    getNameSheet()
+                }
                 
                 
             }
@@ -89,13 +108,14 @@ struct ContentView: View {
                 trailing: NavigationLink(destination: SettingsView()) {
                     Image(systemName: "gear")
                 })
-            .actionSheet(isPresented: $showingNameSelect) {
-                getNameSheet()
-            }
-            .onReceive(NotificationCenter.default.publisher(for: .didSelectDeleteItem)) { pool in
-                DispatchQueue.main.asyncAfter(deadline: .now + 1) {
-                    moc.delete(pool)
-                    try? moc.save()
+            .onReceive(NotificationCenter.default.publisher(for: .didSelectDeleteItem)) { _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    for pool in pools {
+                        if pool.deleteItem {
+                            moc.delete(pool)
+                            try? moc.save()
+                        }
+                    }
                 }
             }
         }
@@ -131,145 +151,18 @@ struct ContentView: View {
         }
     }
     
-    struct AddNew: View {
-        @Environment(\.managedObjectContext) private var moc
-        
-        @AppStorage("slowMode") var slowMode = false
-        @AppStorage("defaultName") var defaultName = ""
-        
-        @Binding var useDefaultName: Bool
-        @Binding var url: String
-        
-        var body: some View {
-            Group {
-                if !defaultName.isEmpty {
-                    Toggle("Use default name", isOn: $useDefaultName)
-                }
-                
-                HStack {
-                    TextField("Pool URL ", text: $url)
-                    Button(action: {
-                        fetchNewData(url: url)
-                        showingAddNew = false
-                        url = ""
-                    }) {
-                        Image(systemName: "plus")
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .foregroundColor(url.isEmpty ? .gray: .blue)
-                    .disabled(url.isEmpty)
-                }
-            }
-            .popup(isPresented: $isLoading, position: .top) {
-                Text("Loading...")
-                    .foregroundColor(.black)
-                    .frame(width: 200, height: 60)
-                    .background(Color(.lightGray))
-                    .cornerRadius(30.0)
-            }
+    func delete(at offsets: IndexSet) {
+        self.isDeleting = true
+        for offset in offsets {
+            deleteItem = pools[offset]
+            moc.delete(pools[offset])
+            showingWarning = true
         }
-        
-        func getNameSheet() -> ActionSheet {
-            var buttons: [Alert.Button] = []
-            for fencer in fencers {
-                buttons.append(.default(Text(fencer)) { finishFetch(trackName: fencer) })
-            }
-            buttons.append(.cancel())
-            
-            return ActionSheet(title: Text("Select your name"), buttons: buttons)
-        }
-        
-        func fetchNewData(url: String) {
-            loadPage(url: url)
-            isLoading = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + (!slowMode ? 5 : 30)) {
-                getData()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    isLoading = false
-                    if !useDefaultName {
-                        showingNameSelect = true
-                    } else {
-                        finishFetch(trackName: defaultName)
-                    }
-                }
-            }
-        }
-        
-        func finishFetch(trackName: String) {
-            var number = 0
-            if !pools.isEmpty {
-                number = Int(pools.last!.id) + 1
-            }
-            if !bouts.isEmpty {
-                let newPool = Pool(fencers: self.fencers, bouts: self.bouts, name: self.name, date: self.date, number: number, context: self.moc)
-                if !trackName.isEmpty {
-                    newPool.trackName = trackName
-                }
-                try? moc.save()
-            }
-        }
-        
-        func loadPage(url: String) {
-            if let url = URL(string: url) {
-                let request = URLRequest(url: url)
-                webView.load(request)
-            }
-        }
-        
-        func getData() {
-            let js = """
-                function runit() {
-                    a = []
-                    x = document.getElementsByClassName("text-center")
-                    for (s of x) {
-                        a.push(s.innerText)
-                    }
-                    return a
-                }
-                runit()
-            """
-            webView.evaluateJavaScript(js) { (result, error) in
-                if let result = result {
-                    bouts = result as! [String]
-                }
-            }
-            webView.evaluateJavaScript("document.getElementsByClassName(\"desktop eventName\")[0].innerText") { (result, error) in
-                if let result = result {
-                    name = (result as! String).trimmingCharacters(in: .whitespacesAndNewlines).condenseWhitespace()
-                }
-            }
-            webView.evaluateJavaScript("document.getElementsByClassName(\"desktop eventTime\")[0].innerText") { (result, error) in
-                if let result = result {
-                    date = (result as! String).trimmingCharacters(in: .whitespacesAndNewlines).condenseWhitespace()
-                }
-            }
-            let namejs = """
-                function runit() {
-                    a = []
-                    x = document.getElementsByClassName("poolCompName")
-                    for (s of x) {
-                        a.push(s.innerText)
-                    }
-                    return a
-                }
-                runit()
-            """
-            webView.evaluateJavaScript(namejs) { (result, error) in
-                if let result = result {
-                    let res = result as! [String]
-                    var fin: [String] = []
-                    for r in res {
-                        if !fin.contains(r) {
-                            fin.append(r)
-                        } else {
-                            break
-                        }
-                    }
-                    fencers = fin
-                }
-            }
-            
-        }
+    }
+    
+    func readdPool(pool: Pool) {
+        moc.insert(pool)
+        try? moc.save()
     }
     
     func getNameSheet() -> ActionSheet {
@@ -371,8 +264,9 @@ struct ContentView: View {
                 fencers = fin
             }
         }
-        
     }
+        
+        
 }
 
 extension String {
@@ -382,57 +276,7 @@ extension String {
     }
 }
 
-/*
- struct WebView: UIViewRepresentable {
-     @Binding var title: String
-     var url: URL
-     var loadStatusChanged: ((Bool, Error?) -> Void)? = nil
 
-     func makeCoordinator() -> WebView.Coordinator {
-         Coordinator(self)
-     }
-
-     func makeUIView(context: Context) -> WKWebView {
-         let view = WKWebView()
-         view.navigationDelegate = context.coordinator
-         view.load(URLRequest(url: url))
-         return view
-     }
-
-     func updateUIView(_ uiView: WKWebView, context: Context) {
-         
-     }
-
-     func onLoadStatusChanged(perform: ((Bool, Error?) -> Void)?) -> some View {
-         var copy = self
-         copy.loadStatusChanged = perform
-         return copy
-     }
-
-     class Coordinator: NSObject, WKNavigationDelegate {
-         let parent: WebView
-
-         init(_ parent: WebView) {
-             self.parent = parent
-         }
-
-         func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-             parent.loadStatusChanged?(true, nil)
-         }
-
-         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-             parent.title = webView.title ?? ""
-             parent.loadStatusChanged?(false, nil)
-             getDataa()
-             isLoading = false
-         }
-
-         func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-             parent.loadStatusChanged?(false, error)
-         }
-     }
- }
-*/
 
 
 struct ContentView_Previews: PreviewProvider {

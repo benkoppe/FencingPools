@@ -48,6 +48,7 @@
 		B575CD47269A0DB300E8D748 /* BracketItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD45269A0DB300E8D748 /* BracketItem+CoreDataProperties.swift */; };
 		B575CD49269CAEE100E8D748 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD48269CAEE100E8D748 /* NotificationCenter.swift */; };
 		B575CD4B269CB22700E8D748 /* AddNewPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD4A269CB22700E8D748 /* AddNewPool.swift */; };
+		B575CD4F269CC65700E8D748 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD4E269CC65700E8D748 /* WebView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +137,7 @@
 		B575CD45269A0DB300E8D748 /* BracketItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BracketItem+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		B575CD48269CAEE100E8D748 /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 		B575CD4A269CB22700E8D748 /* AddNewPool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPool.swift; sourceTree = "<group>"; };
+		B575CD4E269CC65700E8D748 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +200,7 @@
 			children = (
 				B5205F91268FF51C00022CCD /* FencingApp.swift */,
 				B5205F93268FF51C00022CCD /* ContentView.swift */,
+				B575CD4E269CC65700E8D748 /* WebView.swift */,
 				B575CD4A269CB22700E8D748 /* AddNewPool.swift */,
 				B52FA617269170AF00CD5331 /* SettingsView.swift */,
 				B5205FDC2690BA5A00022CCD /* PoolView.swift */,
@@ -484,6 +487,7 @@
 				B575CD43269A0CF200E8D748 /* Enums.swift in Sources */,
 				B575CD47269A0DB300E8D748 /* BracketItem+CoreDataProperties.swift in Sources */,
 				B5205FD42690AF2200022CCD /* Bout+CoreDataClass.swift in Sources */,
+				B575CD4F269CC65700E8D748 /* WebView.swift in Sources */,
 				B52FA6262692DBF600CD5331 /* View-if.swift in Sources */,
 				B5367C8E26955ECC00A3C12E /* PoolInfo.swift in Sources */,
 				B5205FD72690AF2200022CCD /* Pool+CoreDataProperties.swift in Sources */,

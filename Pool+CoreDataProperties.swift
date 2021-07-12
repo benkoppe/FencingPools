@@ -251,4 +251,13 @@ extension Pool {
         
         self.bouts = NSOrderedSet(array: [Bout(number: 0, context: context), Bout(number: 1, context: context), Bout(number: 2, context: context)])
     }
+    
+    convenience init(deletePool: Pool) {
+        self.init(entity: Pool.entity(), insertInto: nil)
+        
+        self.name = deletePool.name
+        self.fencers = deletePool.fencers
+        self.bouts = deletePool.bouts
+        self.currentBout = deletePool.currentBout
+    }
 }

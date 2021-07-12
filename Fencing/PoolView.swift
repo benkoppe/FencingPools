@@ -39,34 +39,36 @@ struct PoolView: View {
     
     var body: some View {
         VStack {
-            Spacer()
-                .frame(height: 5)
-            
-            
-            scoreTable(pool: pool, columns: columns, smallCellSize: smallCellSize)
-            
-            if showingEditScore, let bout = scoreBout, let tracked = pool.getTracked(), let opponent = bout.getOpponent(tracked) {
+            if !pool.uFencers.isEmpty {
+                Spacer()
+                    .frame(height: 5)
+                
+                
+                scoreTable(pool: pool, columns: columns, smallCellSize: smallCellSize)
+                
+                if showingEditScore, let bout = scoreBout, let tracked = pool.getTracked(), let opponent = bout.getOpponent(tracked) {
+                    
+                    Divider()
+                    
+                    editScore(yourScore: $yourScore, opponentScore: $opponentScore, showingEditScore: $showingEditScore, showingScoreAlert: $showingScoreAlert, bout: bout, tracked: tracked, opponent: opponent)
+                }
+                
                 
                 Divider()
                 
-                editScore(yourScore: $yourScore, opponentScore: $opponentScore, showingEditScore: $showingEditScore, showingScoreAlert: $showingScoreAlert, bout: bout, tracked: tracked, opponent: opponent)
-            }
-            
-            
-            Divider()
-            
-            HStack {
-                
-                ScrollViewReader { proxy in
+                HStack {
                     
-                    boutList(pool: pool, yourScore: $yourScore, opponentScore: $opponentScore, scoreBout: $scoreBout, showingEditScore: $showingEditScore)
-                        .toolbar {
-                            ToolbarItemGroup(placement: .bottomBar) {
-                                toolbarItems(pool: pool, proxy: proxy, yourScore: $yourScore, opponentScore: $opponentScore, scoreBout: $scoreBout, showingEditScore: $showingEditScore)
+                    ScrollViewReader { proxy in
+                        
+                        boutList(pool: pool, yourScore: $yourScore, opponentScore: $opponentScore, scoreBout: $scoreBout, showingEditScore: $showingEditScore)
+                            .toolbar {
+                                ToolbarItemGroup(placement: .bottomBar) {
+                                    toolbarItems(pool: pool, proxy: proxy, yourScore: $yourScore, opponentScore: $opponentScore, scoreBout: $scoreBout, showingEditScore: $showingEditScore)
+                                }
                             }
-                        }
-                    
-                } // end of reader
+                        
+                    } // end of reader
+                }
             }
         }
         .environmentObject(pool)
@@ -447,8 +449,6 @@ struct PoolView: View {
         @Binding var scoreBout: Bout?
         @Binding var showingEditScore: Bool
         
-        @State private var confirmationAlert = false
-        
         var body: some View {
             List {
                 Section(header: Text("Bouts")) {
@@ -458,21 +458,8 @@ struct PoolView: View {
                         
                     }
                 }
-                
-                Button("Delete Pool") {
-                    confirmationAlert = true
-                }
-                .foregroundColor(.red)
             }
             .listStyle(InsetGroupedListStyle())
-            .alert(isPresented: $confirmationAlert) {
-                Alert(title: Text("Are you sure?"), message: Text("Do you really want to delete this pool?"),
-                      primaryButton: .destructive(Text("Yes"), action: {
-                        NotificationCenter.default.post(name: .didSelectDeleteItem, object: pool)
-                        presentationMode.wrappedValue.dismiss()
-                      }),
-                      secondaryButton: .cancel(Text("No")))
-            }
         }
     } // Bout list
     
