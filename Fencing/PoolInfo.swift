@@ -97,6 +97,7 @@ struct PoolInfo: View {
     
     struct trackedNameButton: View {
         @ObservedObject var pool: Pool
+        @AppStorage("trackedColor") var trackedColor = Color.teal
         
         @Binding var trackedName: String
         let fencers: [Fencer]
@@ -124,7 +125,7 @@ struct PoolInfo: View {
                 Text(trackedName)
                     .fixedSize(horizontal: true, vertical: false)
             }
-            .foregroundColor(Color.teal)
+            .foregroundColor(trackedColor)
         }
         
         func getNameSheet() -> ActionSheet {

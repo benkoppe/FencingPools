@@ -14,6 +14,8 @@ struct PoolView: View {
     @Environment(\.managedObjectContext) private var moc
     @Environment(\.presentationMode) var presentationMode
     
+    @AppStorage("trackedColor") var trackedColor = Color.teal
+    
     @ObservedObject var pool: Pool
     
     @State private var expand = false
@@ -86,6 +88,7 @@ struct PoolView: View {
     
     struct scoreTable: View {
         @ObservedObject var pool: Pool
+        @AppStorage("trackedColor") var trackedColor = Color.teal
         
         let columns: [GridItem]
         let smallCellSize: CGFloat
@@ -99,7 +102,7 @@ struct PoolView: View {
                             Text("\(i)")
                                 .bold()
                                 .if(pool.isTracked(fencer: pool.uFencers[i-1])) {view in
-                                    view.foregroundColor(Color.teal)
+                                    view.foregroundColor(trackedColor)
                                 }
                                 .font(.system(size: 11))
                             
@@ -160,6 +163,7 @@ struct PoolView: View {
     } // Table with scores
     
     struct fencerRow: View {
+        @AppStorage("trackedColor") var trackedColor = Color.teal
         @ObservedObject var pool: Pool
         let num: Int
         
@@ -169,13 +173,13 @@ struct PoolView: View {
                     .font(.system(size: 11))
                     .bold()
                     .if(pool.isTracked(fencer: pool.uFencers[num])) {view in
-                        view.foregroundColor(Color.teal)
+                        view.foregroundColor(trackedColor)
                     }
                 Text(pool.uFencers[num].uName)
                     //.bold()
                     .font(.system(size: 10))
                     .if(pool.isTracked(fencer: pool.uFencers[num])) {view in
-                        view.foregroundColor(Color.teal)
+                        view.foregroundColor(trackedColor)
                     }
                     .lineLimit(1)
                 Text(" ")
@@ -464,6 +468,7 @@ struct PoolView: View {
     } // Bout list
     
     struct boutListRow: View {
+        @AppStorage("trackedColor") var trackedColor = Color.teal
         @Environment(\.managedObjectContext) private var moc
         
         @ObservedObject var pool: Pool
@@ -501,10 +506,10 @@ struct PoolView: View {
             Group {
                 HStack {
                     Text("\(bout.uLeft.uNumber+1)")
-                        .foregroundColor(!pool.isTracked(fencer: bout.uLeft) ? .primary : Color.teal)
+                        .foregroundColor(!pool.isTracked(fencer: bout.uLeft) ? .primary : trackedColor)
                     Text(bout.uLeft.uName)
                         .font(.caption)
-                        .foregroundColor(!pool.isTracked(fencer: bout.uLeft) ? .secondary : Color.teal)
+                        .foregroundColor(!pool.isTracked(fencer: bout.uLeft) ? .secondary : trackedColor)
                         .if(pool.isTracked(fencer: bout.uLeft)) { view in
                             view.opacity(0.65)
                         }
@@ -518,14 +523,14 @@ struct PoolView: View {
                     Spacer()
                     Text(bout.uRight.uName)
                         .font(.caption)
-                        .foregroundColor(!pool.isTracked(fencer: bout.uRight) ? .secondary : Color.teal)
+                        .foregroundColor(!pool.isTracked(fencer: bout.uRight) ? .secondary : trackedColor)
                         .if(pool.isTracked(fencer: bout.uRight)) { view in
                             view.opacity(0.65)
                         }
                         .lineLimit(1)
                         .frame(width: 120, alignment: .trailing)
                     Text("\(bout.uRight.uNumber+1)")
-                        .foregroundColor(!pool.isTracked(fencer: bout.uRight) ? .primary : Color.teal)
+                        .foregroundColor(!pool.isTracked(fencer: bout.uRight) ? .primary : trackedColor)
                 }
                 .contextMenu {
                     

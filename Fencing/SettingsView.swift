@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @AppStorage("slowMode") var slowMode = false
     @AppStorage("defaultName") var defaultName = ""
     @AppStorage("trackedColor") var trackedColor = Color.teal
     
     var body: some View {
         Form {
-            Section(header: Color.clear.frame(width: 0, height: 0), footer: Text("Will use this name as a default when creating pools. Use your exact USA Fencing name.")) {
+            Section(header: Text("Tracked Name"), footer: Text("Will use this name as a default when creating pools. Use your exact USA Fencing name.")) {
                 
                 TextField("Default name", text: $defaultName)
             }
@@ -32,9 +31,24 @@ struct SettingsView: View {
                 }
             }
             
-            Section(footer: Text("Turn this toggle on if you are currently using slow wifi. Will take significantly longer to load.")) {
-                Toggle("Slow WiFi Mode", isOn: $slowMode)
+            Section(header: Text("Toolbar")) {
+                HStack {
+                    Group {
+                        Spacer()
+                        Image(systemName: "square.dashed")
+                        Spacer()
+                        Image(systemName: "square.dashed")
+                        Spacer()
+                    }
+                    Image(systemName: "square.dashed")
+                    Spacer()
+                    Image(systemName: "square.dashed")
+                    Spacer()
+                    Image(systemName: "square.dashed")
+                    Spacer()
+                }
             }
+            
         }
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)

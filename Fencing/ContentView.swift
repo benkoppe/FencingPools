@@ -14,11 +14,11 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var moc
     @FetchRequest(entity: Pool.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Pool.id, ascending: true)]) private var pools: FetchedResults<Pool>
     
-    @AppStorage("slowMode") var slowMode = false
     @AppStorage("defaultName") var defaultName = ""
     
     let webView = WKWebView()
-    @State private var isLoading = false
+    
+    @State private var stillLoading = false
     @State private var showingAddNew = false
     @State private var bouts: [String] = []
     @State private var fencers: [String] = []
@@ -90,9 +90,8 @@ struct ContentView: View {
                     getNameSheet()
                 }
                 
-                
             }
-            .popup(isPresented: $isLoading, position: .top) {
+            .popup(isPresented: $stillLoading, position: .top) {
                 Text("Loading...")
                     .foregroundColor(.black)
                     .frame(width: 200, height: 60)
@@ -100,7 +99,7 @@ struct ContentView: View {
                     .cornerRadius(30.0)
             }
             .navigationTitle("Fencing")
-            .disabled(isLoading)
+            .disabled(stillLoading)
             .navigationBarItems(
                 leading: NavigationLink(destination: AllBracketsView()) {
                     Text("DE Bracket")
@@ -177,17 +176,17 @@ struct ContentView: View {
     
     func fetchNewData(url: String) {
         loadPage(url: url)
-        isLoading = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + (!slowMode ? 5 : 30)) {
-            getData()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                isLoading = false
-                if !useDefaultName {
-                    showingNameSelect = true
-                } else {
-                    finishFetch(trackName: defaultName)
-                }
+        stillLoading = true
+        waitForLoad()
+    }
+    
+    func waitForLoad() {
+        if webView.isLoading {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                waitForLoad()
             }
+        } else {
+            getData()
         }
     }
     
@@ -264,9 +263,16 @@ struct ContentView: View {
                 fencers = fin
             }
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            stillLoading = false
+            if !useDefaultName {
+                showingNameSelect = true
+            } else {
+                finishFetch(trackName: defaultName)
+            }
+        }
     }
-        
-        
 }
 
 extension String {

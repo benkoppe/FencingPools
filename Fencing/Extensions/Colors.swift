@@ -10,6 +10,7 @@ import SwiftUI
 import UIKit
 
 public extension Color {
+    
     static let lightText = Color(UIColor.lightText)
     static let darkText = Color(UIColor.darkText)
 
@@ -27,7 +28,6 @@ public extension Color {
     static let tertiaryGroupedBackground = Color(UIColor.tertiarySystemGroupedBackground)
     
     static let teal = Color(UIColor.systemTeal)
-    //static let teal = Color("TrackedColor")
     
     
 
