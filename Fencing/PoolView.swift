@@ -358,7 +358,12 @@ struct PoolView: View {
                 }
 
                 func setup(_ textField:UITextField) {
+                    textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
                     textField.addTarget(self, action: #selector(textFieldDidBeginEditing), for: .editingDidBegin)
+                }
+                
+                @objc func textFieldDidChange(_ textField: UITextField) {
+                    self.parent.text.wrappedValue = textField.text ?? ""
                 }
                 
                 @objc func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -442,6 +447,8 @@ struct PoolView: View {
         @Binding var scoreBout: Bout?
         @Binding var showingEditScore: Bool
         
+        @State private var confirmationAlert = false
+        
         var body: some View {
             List {
                 Section(header: Text("Bouts")) {
@@ -453,13 +460,19 @@ struct PoolView: View {
                 }
                 
                 Button("Delete Pool") {
-                    presentationMode.wrappedValue.dismiss()
-                    moc.delete(pool)
-                    try? moc.save()
+                    confirmationAlert = true
                 }
                 .foregroundColor(.red)
             }
             .listStyle(InsetGroupedListStyle())
+            .alert(isPresented: $confirmationAlert) {
+                Alert(title: Text("Are you sure?"), message: Text("Do you really want to delete this pool?"),
+                      primaryButton: .destructive(Text("Yes"), action: {
+                        NotificationCenter.default.post(name: .didSelectDeleteItem, object: pool)
+                        presentationMode.wrappedValue.dismiss()
+                      }),
+                      secondaryButton: .cancel(Text("No")))
+            }
         }
     } // Bout list
     

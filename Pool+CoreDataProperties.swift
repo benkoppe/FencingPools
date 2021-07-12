@@ -25,6 +25,8 @@ extension Pool {
     @NSManaged public var id: Int16
     @NSManaged public var currentBout: Int16
     
+    @NSManaged public var deleteItem: Bool
+    
     public var uName: String {
         return name ?? ""
     }
@@ -219,6 +221,8 @@ extension Pool {
         self.date = date
         self.id = Int16(number)
         
+        self.deleteItem = false
+        
         var fencerArray: [Fencer] = []
         
         for i in 0..<fencers.count {
@@ -243,6 +247,7 @@ extension Pool {
         self.defaultName = name
         self.date = "December 1, 2020"
         self.id = Int16(1)
+        self.deleteItem = false
         
         self.bouts = NSOrderedSet(array: [Bout(number: 0, context: context), Bout(number: 1, context: context), Bout(number: 2, context: context)])
     }

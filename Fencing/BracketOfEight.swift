@@ -9,9 +9,11 @@ import SwiftUI
 
 struct BracketOfEight: View {
     
-    let names = [["Benjamin Koppe", "Alexander Koppe"], ["Matthew Dao", "Connor Jeong"], ["Nicholas Candela", "Thomas Chung"], ["Nolan Yumaico", "Jake Maeng"], ["Benjamin Koppe", "Alexander Koppe"], ["Matthew Dao", "Connor Jeong"], ["Nicholas Candela", "Thomas Chung"], ["Nolan Yumaico", "Jake Maeng"]]
+    init(items: [[BracketItem]]) {
+        self.items = items
+    }
     
-    let fencers: [Fencer?] = []
+    var items: [[BracketItem]] = []
     
     @State private var columns: [GridItem] = []
     @State private var currentItem = 0
@@ -20,19 +22,19 @@ struct BracketOfEight: View {
         
         GeometryReader { geo in
             LazyVGrid(columns: columns, spacing: 0) {
-                ForEach(0 ..< names.count * 4) { i in
-                    makeColumn1(currentRow: i, name1: names[i/4][0], name2: names[i/4][1])
+                ForEach(0 ..< items.count * 4) { i in
+                    makeColumn1(currentRow: i, item1: items[i/4][0], item2: items[i/4][1])
                     makeColumn2(currentRow: i, name1: "", name2: "")
                     makeColumn3(currentRow: i, name1: "", name2: "")
                 }
             }
             .onAppear() { setColumns(geo: geo) }
         }
-        .padding(40)
+        .padding(20)
     }
     
     func setColumns(geo: GeometryProxy) {
-        let firstSize = geo.size.width / 2
+        let firstSize = geo.size.width / 1.4
         let size = (geo.size.width - firstSize) / 2
         
         var final: [GridItem] = [GridItem(.fixed(firstSize), spacing: 0, alignment: .trailing)]
@@ -45,8 +47,8 @@ struct BracketOfEight: View {
     struct makeColumn1: View {
         
         let currentRow: Int
-        let name1: String
-        let name2: String
+        let item1: BracketItem
+        let item2: BracketItem
         
         let aRows = 4
         var aCurrentRow: Int {
@@ -59,8 +61,7 @@ struct BracketOfEight: View {
                 
                 case 0:
                     HStack {
-                        Text(name1)
-                            .lineLimit(1)
+                        itemInterior(item: item1)
                         Spacer()
                     }
                     .padding(1)
@@ -71,8 +72,7 @@ struct BracketOfEight: View {
                         .singleBorder(.trailing)
                 case 2:
                     HStack {
-                        Text(name2)
-                            .lineLimit(1)
+                        itemInterior(item: item2)
                         Spacer()
                     }
                     .padding(1)
@@ -86,6 +86,37 @@ struct BracketOfEight: View {
                     EmptyView()
                 }
             }
+        }
+    }
+    
+    struct itemInterior: View {
+        let item: BracketItem
+        
+        var body: some View {
+            HStack {
+                switch item.uType {
+                case .single:
+                    Text(item.uNumber)
+                        .lineLimit(1)
+                        .foregroundColor(.secondary)
+                        .frame(width: 45)
+                    Text(item.singleFencer!.uName)
+                        .lineLimit(1)
+                case .multi:
+                    Text(item.uNumber)
+                        .lineLimit(1)
+                        .foregroundColor(.secondary)
+                        .frame(width: 45)
+                    Text("Multi")
+                        .lineLimit(1)
+                case .bye:
+                    Text("")
+                        .frame(width: 45)
+                    Text("Bye")
+                        .lineLimit(1)
+                }
+            }
+            .padding(.bottom, 1)
         }
     }
     
@@ -225,6 +256,6 @@ extension View {
 
 struct OneBracket_Previews: PreviewProvider {
     static var previews: some View {
-        BracketOfEight()
+        BracketOfEight(items: [])
     }
 }

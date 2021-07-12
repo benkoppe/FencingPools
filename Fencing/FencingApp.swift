@@ -13,8 +13,8 @@ struct FencingApp: App {
 
     var body: some Scene {
         WindowGroup {
-            //ContentView()
-            BracketView()
+            ContentView()
+            //AllBracketsView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

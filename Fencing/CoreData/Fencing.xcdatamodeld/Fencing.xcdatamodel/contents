@@ -10,18 +10,27 @@
         <relationship name="pool" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pool" inverseName="bouts" inverseEntity="Pool"/>
         <relationship name="right" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Fencer" inverseName="rightBouts" inverseEntity="Fencer"/>
     </entity>
+    <entity name="BracketItem" representedClassName="BracketItem" syncable="YES">
+        <attribute name="number" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="multiFencer" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Fencer" inverseName="multiBracketItem" inverseEntity="Fencer"/>
+        <relationship name="singleFencer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Fencer" inverseName="singleBracketItem" inverseEntity="Fencer"/>
+    </entity>
     <entity name="Fencer" representedClassName="Fencer" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="placement" optional="YES" attributeType="String"/>
         <relationship name="assignedPool" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pool" inverseName="fencers" inverseEntity="Pool"/>
         <relationship name="leftBouts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bout" inverseName="left" inverseEntity="Bout"/>
+        <relationship name="multiBracketItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BracketItem" inverseName="multiFencer" inverseEntity="BracketItem"/>
         <relationship name="rightBouts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bout" inverseName="right" inverseEntity="Bout"/>
+        <relationship name="singleBracketItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BracketItem" inverseName="singleFencer" inverseEntity="BracketItem"/>
     </entity>
     <entity name="Pool" representedClassName="Pool" syncable="YES">
         <attribute name="currentBout" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="date" optional="YES" attributeType="String"/>
         <attribute name="defaultName" optional="YES" attributeType="String"/>
+        <attribute name="deleteItem" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="trackName" optional="YES" attributeType="String"/>
@@ -30,7 +39,8 @@
     </entity>
     <elements>
         <element name="Bout" positionX="-63" positionY="-18" width="128" height="149"/>
-        <element name="Fencer" positionX="-36" positionY="63" width="128" height="119"/>
-        <element name="Pool" positionX="-63" positionY="0" width="128" height="149"/>
+        <element name="Fencer" positionX="-36" positionY="63" width="128" height="149"/>
+        <element name="Pool" positionX="-63" positionY="0" width="128" height="164"/>
+        <element name="BracketItem" positionX="-45" positionY="72" width="128" height="89"/>
     </elements>
 </model>

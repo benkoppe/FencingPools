@@ -28,7 +28,7 @@
 		B52FA61C2691827700CD5331 /* GridInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FA61B2691827700CD5331 /* GridInfo.swift */; };
 		B52FA6202692AF2C00CD5331 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FA61F2692AF2C00CD5331 /* Colors.swift */; };
 		B52FA6222692BFA100CD5331 /* Zoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FA6212692BFA100CD5331 /* Zoom.swift */; };
-		B52FA6242692C36C00CD5331 /* BracketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FA6232692C36C00CD5331 /* BracketView.swift */; };
+		B52FA6242692C36C00CD5331 /* AllBracketsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FA6232692C36C00CD5331 /* AllBracketsView.swift */; };
 		B52FA6262692DBF600CD5331 /* View-if.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FA6252692DBF600CD5331 /* View-if.swift */; };
 		B52FA62E2693BFE400CD5331 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FA62D2693BFE400CD5331 /* ShareViewController.swift */; };
 		B52FA6312693BFE400CD5331 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B52FA62F2693BFE400CD5331 /* MainInterface.storyboard */; };
@@ -41,6 +41,13 @@
 		B575CD362698E63E00E8D748 /* BracketOfEight.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD352698E63E00E8D748 /* BracketOfEight.swift */; };
 		B575CD3B26996C0200E8D748 /* DE Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD3A26996C0200E8D748 /* DE Orders.swift */; };
 		B575CD3D2699ED9600E8D748 /* BracketOfSixteen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD3C2699ED9600E8D748 /* BracketOfSixteen.swift */; };
+		B575CD3F2699F14D00E8D748 /* Array-Chunked.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD3E2699F14D00E8D748 /* Array-Chunked.swift */; };
+		B575CD412699F41900E8D748 /* BracketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD402699F41900E8D748 /* BracketView.swift */; };
+		B575CD43269A0CF200E8D748 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD42269A0CF200E8D748 /* Enums.swift */; };
+		B575CD46269A0DB300E8D748 /* BracketItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD44269A0DB300E8D748 /* BracketItem+CoreDataClass.swift */; };
+		B575CD47269A0DB300E8D748 /* BracketItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD45269A0DB300E8D748 /* BracketItem+CoreDataProperties.swift */; };
+		B575CD49269CAEE100E8D748 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD48269CAEE100E8D748 /* NotificationCenter.swift */; };
+		B575CD4B269CB22700E8D748 /* AddNewPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD4A269CB22700E8D748 /* AddNewPool.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,7 +115,7 @@
 		B52FA61B2691827700CD5331 /* GridInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridInfo.swift; sourceTree = "<group>"; };
 		B52FA61F2692AF2C00CD5331 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		B52FA6212692BFA100CD5331 /* Zoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zoom.swift; sourceTree = "<group>"; };
-		B52FA6232692C36C00CD5331 /* BracketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketView.swift; sourceTree = "<group>"; };
+		B52FA6232692C36C00CD5331 /* AllBracketsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllBracketsView.swift; sourceTree = "<group>"; };
 		B52FA6252692DBF600CD5331 /* View-if.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View-if.swift"; sourceTree = "<group>"; };
 		B52FA62B2693BFE400CD5331 /* FencingTimeURL.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FencingTimeURL.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52FA62D2693BFE400CD5331 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +129,13 @@
 		B575CD352698E63E00E8D748 /* BracketOfEight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketOfEight.swift; sourceTree = "<group>"; };
 		B575CD3A26996C0200E8D748 /* DE Orders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DE Orders.swift"; sourceTree = "<group>"; };
 		B575CD3C2699ED9600E8D748 /* BracketOfSixteen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketOfSixteen.swift; sourceTree = "<group>"; };
+		B575CD3E2699F14D00E8D748 /* Array-Chunked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-Chunked.swift"; sourceTree = "<group>"; };
+		B575CD402699F41900E8D748 /* BracketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketView.swift; sourceTree = "<group>"; };
+		B575CD42269A0CF200E8D748 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		B575CD44269A0DB300E8D748 /* BracketItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BracketItem+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		B575CD45269A0DB300E8D748 /* BracketItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BracketItem+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		B575CD48269CAEE100E8D748 /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
+		B575CD4A269CB22700E8D748 /* AddNewPool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPool.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,10 +198,12 @@
 			children = (
 				B5205F91268FF51C00022CCD /* FencingApp.swift */,
 				B5205F93268FF51C00022CCD /* ContentView.swift */,
+				B575CD4A269CB22700E8D748 /* AddNewPool.swift */,
 				B52FA617269170AF00CD5331 /* SettingsView.swift */,
 				B5205FDC2690BA5A00022CCD /* PoolView.swift */,
 				B5367C8D26955ECC00A3C12E /* PoolInfo.swift */,
-				B52FA6232692C36C00CD5331 /* BracketView.swift */,
+				B52FA6232692C36C00CD5331 /* AllBracketsView.swift */,
+				B575CD402699F41900E8D748 /* BracketView.swift */,
 				B575CD3A26996C0200E8D748 /* DE Orders.swift */,
 				B575CD352698E63E00E8D748 /* BracketOfEight.swift */,
 				B575CD3C2699ED9600E8D748 /* BracketOfSixteen.swift */,
@@ -239,7 +255,10 @@
 		B5205FC72690AEE600022CCD /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				B575CD44269A0DB300E8D748 /* BracketItem+CoreDataClass.swift */,
+				B575CD45269A0DB300E8D748 /* BracketItem+CoreDataProperties.swift */,
 				B5205FDE2690E24200022CCD /* Fencer+CoreDataClass.swift */,
+				B575CD48269CAEE100E8D748 /* NotificationCenter.swift */,
 				B5205FDF2690E24200022CCD /* Fencer+CoreDataProperties.swift */,
 				B5205FD02690AF2200022CCD /* Bout+CoreDataClass.swift */,
 				B5205FD12690AF2200022CCD /* Bout+CoreDataProperties.swift */,
@@ -254,12 +273,14 @@
 			children = (
 				B52FA61526910A4300CD5331 /* FormatScore.swift */,
 				B575CD332697595400E8D748 /* UITextField-Toolbar.swift */,
+				B575CD3E2699F14D00E8D748 /* Array-Chunked.swift */,
 				B575CD312697576200E8D748 /* String-substring.swift */,
 				B52FA6212692BFA100CD5331 /* Zoom.swift */,
 				B52FA61F2692AF2C00CD5331 /* Colors.swift */,
 				B52FA61B2691827700CD5331 /* GridInfo.swift */,
 				B52FA6252692DBF600CD5331 /* View-if.swift */,
 				B5367C8B26955B1300A3C12E /* Color-AppStorage.swift */,
+				B575CD42269A0CF200E8D748 /* Enums.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -443,11 +464,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5205F9B268FF51D00022CCD /* Persistence.swift in Sources */,
+				B575CD412699F41900E8D748 /* BracketView.swift in Sources */,
 				B52FA6202692AF2C00CD5331 /* Colors.swift in Sources */,
 				B575CD3D2699ED9600E8D748 /* BracketOfSixteen.swift in Sources */,
 				B5205FE12690E24200022CCD /* Fencer+CoreDataProperties.swift in Sources */,
 				B575CD362698E63E00E8D748 /* BracketOfEight.swift in Sources */,
-				B52FA6242692C36C00CD5331 /* BracketView.swift in Sources */,
+				B52FA6242692C36C00CD5331 /* AllBracketsView.swift in Sources */,
 				B5205F94268FF51C00022CCD /* ContentView.swift in Sources */,
 				B5367C8C26955B1300A3C12E /* Color-AppStorage.swift in Sources */,
 				B5205FD62690AF2200022CCD /* Pool+CoreDataClass.swift in Sources */,
@@ -456,16 +478,22 @@
 				B575CD3B26996C0200E8D748 /* DE Orders.swift in Sources */,
 				B5205FE02690E24200022CCD /* Fencer+CoreDataClass.swift in Sources */,
 				B52FA61626910A4300CD5331 /* FormatScore.swift in Sources */,
+				B575CD3F2699F14D00E8D748 /* Array-Chunked.swift in Sources */,
 				B5205F9E268FF51D00022CCD /* Fencing.xcdatamodeld in Sources */,
 				B52FA6222692BFA100CD5331 /* Zoom.swift in Sources */,
+				B575CD43269A0CF200E8D748 /* Enums.swift in Sources */,
+				B575CD47269A0DB300E8D748 /* BracketItem+CoreDataProperties.swift in Sources */,
 				B5205FD42690AF2200022CCD /* Bout+CoreDataClass.swift in Sources */,
 				B52FA6262692DBF600CD5331 /* View-if.swift in Sources */,
 				B5367C8E26955ECC00A3C12E /* PoolInfo.swift in Sources */,
 				B5205FD72690AF2200022CCD /* Pool+CoreDataProperties.swift in Sources */,
+				B575CD4B269CB22700E8D748 /* AddNewPool.swift in Sources */,
 				B5205F92268FF51C00022CCD /* FencingApp.swift in Sources */,
 				B5205FD52690AF2200022CCD /* Bout+CoreDataProperties.swift in Sources */,
 				B52FA618269170AF00CD5331 /* SettingsView.swift in Sources */,
+				B575CD49269CAEE100E8D748 /* NotificationCenter.swift in Sources */,
 				B575CD322697576200E8D748 /* String-substring.swift in Sources */,
+				B575CD46269A0DB300E8D748 /* BracketItem+CoreDataClass.swift in Sources */,
 				B575CD342697595400E8D748 /* UITextField-Toolbar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
