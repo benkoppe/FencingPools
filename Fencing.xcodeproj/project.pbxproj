@@ -48,6 +48,7 @@
 		B575CD47269A0DB300E8D748 /* BracketItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD45269A0DB300E8D748 /* BracketItem+CoreDataProperties.swift */; };
 		B575CD49269CAEE100E8D748 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD48269CAEE100E8D748 /* NotificationCenter.swift */; };
 		B575CD4B269CB22700E8D748 /* AddNewPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD4A269CB22700E8D748 /* AddNewPool.swift */; };
+		B575CD51269CE8AF00E8D748 /* Array-RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD50269CE8AF00E8D748 /* Array-RawRepresentable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +137,7 @@
 		B575CD45269A0DB300E8D748 /* BracketItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BracketItem+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		B575CD48269CAEE100E8D748 /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 		B575CD4A269CB22700E8D748 /* AddNewPool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPool.swift; sourceTree = "<group>"; };
+		B575CD50269CE8AF00E8D748 /* Array-RawRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-RawRepresentable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,6 +276,7 @@
 				B52FA61526910A4300CD5331 /* FormatScore.swift */,
 				B575CD332697595400E8D748 /* UITextField-Toolbar.swift */,
 				B575CD3E2699F14D00E8D748 /* Array-Chunked.swift */,
+				B575CD50269CE8AF00E8D748 /* Array-RawRepresentable.swift */,
 				B575CD312697576200E8D748 /* String-substring.swift */,
 				B52FA6212692BFA100CD5331 /* Zoom.swift */,
 				B52FA61F2692AF2C00CD5331 /* Colors.swift */,
@@ -479,6 +482,7 @@
 				B5205FE02690E24200022CCD /* Fencer+CoreDataClass.swift in Sources */,
 				B52FA61626910A4300CD5331 /* FormatScore.swift in Sources */,
 				B575CD3F2699F14D00E8D748 /* Array-Chunked.swift in Sources */,
+				B575CD51269CE8AF00E8D748 /* Array-RawRepresentable.swift in Sources */,
 				B5205F9E268FF51D00022CCD /* Fencing.xcdatamodeld in Sources */,
 				B52FA6222692BFA100CD5331 /* Zoom.swift in Sources */,
 				B575CD43269A0CF200E8D748 /* Enums.swift in Sources */,

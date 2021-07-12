@@ -622,6 +622,9 @@ struct PoolView: View {
     struct toolbarItems: View {
         @Environment(\.managedObjectContext) private var moc
         
+        @AppStorage("toolbarItemCount") var toolbarItemCount = defaultToolbarSize
+        @AppStorage("toolbarItems") var toolbarItems: [ToolbarItemType] = defaultToolbar
+        
         @ObservedObject var pool: Pool
         let proxy: ScrollViewProxy
         
@@ -633,27 +636,23 @@ struct PoolView: View {
         var body: some View {
             Spacer()
             
-            scrollToItem(pool: pool, proxy: proxy)
-            
-            Spacer()
-            
-            Group {
+            ForEach(0..<toolbarItemCount, id: \.self) { index in
+                switch toolbarItems[index] {
                 
-                backOneItem(pool: pool, proxy: proxy)
-                    .environment(\.managedObjectContext, self.moc)
+                case .blank:
+                    Spacer()
+                case .leftArrow:
+                    backOneItem(pool: pool, proxy: proxy)
+                case .rightArrow:
+                    forwardOneItem(pool: pool, proxy: proxy)
+                case .scrollToItem:
+                    scrollToItem(pool: pool, proxy: proxy)
+                case .editScore:
+                    editScoreItem(yourScore: $yourScore, opponentScore: $opponentScore, scoreBout: $scoreBout, showingEditScore: $showingEditScore, pool: pool)
+                }
                 
-                Spacer().frame(width: 10)
-                
-                forwardOneItem(pool: pool, proxy: proxy)
-                    .environment(\.managedObjectContext, self.moc)
-                
+                Spacer()
             }
-            
-            Spacer()
-            
-            editScoreItem(yourScore: $yourScore, opponentScore: $opponentScore, scoreBout: $scoreBout, showingEditScore: $showingEditScore, pool: pool)
-            
-            Spacer()
         }
     } // Toolbar
     
