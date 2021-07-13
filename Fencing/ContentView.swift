@@ -24,6 +24,7 @@ struct ContentView: View {
     @State private var fencers: [String] = []
     @State private var name = ""
     @State private var date = ""
+    @State private var strip = ""
     @State private var url = ""
     
     @State private var useDefaultName = false
@@ -32,27 +33,27 @@ struct ContentView: View {
     
     @State private var isDeleting = false
     @State private var showingWarning = false
-    @State private var deleteItem: Pool?
+    @State private var deletePool: Pool?
     
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Pools")) {
-                    if !pools.isEmpty {
+                    if !pools.isEmpty || isDeleting {
                         ForEach(pools) { pool in
                             PoolListItem(pool: pool)
+                                .id(pool.self)
                         }
-                        .onDelete(perform: delete)
+                        //.onDelete(perform: delete)
                     } else {
                         EmptyPool()
                     }
                 }
                 .alert(isPresented: $showingWarning) {
-                    Alert(title: Text("Delete \(deleteItem?.uName ?? "")"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
-                        try? moc.save()
-                        self.isDeleting = false
+                    Alert(title: Text("Delete \(deletePool?.uName ?? "")"), message: Text("Are you sure?"), primaryButton: .destructive(Text("Delete")) {
+                       confirmDelete()
                     }, secondaryButton: .cancel() {
-                        if let pool = deleteItem {
+                        if let pool = deletePool {
                             self.readdPool(pool: pool)
                         }
                         self.isDeleting = false
@@ -62,6 +63,7 @@ struct ContentView: View {
                 Section {
                     Button("New Pool") {
                         withAnimation { showingAddNew.toggle(); useDefaultName = false }
+                        url = ""
                     }
                     
                     if showingAddNew {
@@ -75,7 +77,6 @@ struct ContentView: View {
                                 Button(action: {
                                     fetchNewData(url: url)
                                     showingAddNew = false
-                                    url = ""
                                 }) {
                                     Image(systemName: "plus")
                                 }
@@ -124,6 +125,7 @@ struct ContentView: View {
                 }
                 .padding(10)
             }
+            .isDetailLink(false)
         }
     }
     
@@ -143,10 +145,25 @@ struct ContentView: View {
     func delete(at offsets: IndexSet) {
         self.isDeleting = true
         for offset in offsets {
-            deleteItem = pools[offset]
+            deletePool = pools[offset]
             moc.delete(pools[offset])
             showingWarning = true
         }
+    }
+    
+    func confirmDelete() {
+        if let bouts = deletePool?.uBouts {
+            for bout in bouts {
+                moc.delete(bout)
+            }
+        }
+        if let fencers = deletePool?.uFencers {
+            for fencer in fencers {
+                moc.delete(fencer)
+            }
+        }
+        try? moc.save()
+        self.isDeleting = false
     }
     
     func readdPool(pool: Pool) {
@@ -167,7 +184,9 @@ struct ContentView: View {
     func fetchNewData(url: String) {
         loadPage(url: url)
         stillLoading = true
-        waitForLoad()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            waitForLoad()
+        }
     }
     
     func waitForLoad() {
@@ -186,12 +205,13 @@ struct ContentView: View {
             number = Int(pools.last!.id) + 1
         }
         if !bouts.isEmpty {
-            let newPool = Pool(fencers: self.fencers, bouts: self.bouts, name: self.name, date: self.date, number: number, context: self.moc)
+            let newPool = Pool(fencers: self.fencers, bouts: self.bouts, name: self.name, date: self.date, number: number, strip: strip, url: url, context: self.moc)
             if !trackName.isEmpty {
                 newPool.trackName = trackName
             }
             try? moc.save()
         }
+        url = ""
     }
     
     func loadPage(url: String) {
@@ -226,6 +246,11 @@ struct ContentView: View {
         webView.evaluateJavaScript("document.getElementsByClassName(\"desktop eventTime\")[0].innerText") { (result, error) in
             if let result = result {
                 date = (result as! String).trimmingCharacters(in: .whitespacesAndNewlines).condenseWhitespace()
+            }
+        }
+        webView.evaluateJavaScript("document.getElementsByClassName(\"poolStripTime\")[0].innerText") { (result, error) in
+            if let result = result {
+                strip = "Strip " + (result as! String).trimmingCharacters(in: .whitespacesAndNewlines).condenseWhitespace()[9..<11]
             }
         }
         let namejs = """

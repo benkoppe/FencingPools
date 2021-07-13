@@ -13,6 +13,7 @@ import PopupView
 struct PoolView: View {
     @Environment(\.managedObjectContext) private var moc
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.openURL) var openURL
     
     @AppStorage("trackedColor") var trackedColor = Color.teal
     
@@ -28,6 +29,10 @@ struct PoolView: View {
     @State private var showingScoreAlert = false
     
     @State private var showingInfo = false
+    
+    @State private var showingUrlIssue = false
+    
+    @State private var showingDeleteAlert = false
     
     let smallCellSize: CGFloat = 35
     
@@ -62,7 +67,7 @@ struct PoolView: View {
                     
                     ScrollViewReader { proxy in
                         
-                        boutList(pool: pool, yourScore: $yourScore, opponentScore: $opponentScore, scoreBout: $scoreBout, showingEditScore: $showingEditScore)
+                        boutList(pool: pool, yourScore: $yourScore, opponentScore: $opponentScore, scoreBout: $scoreBout, showingEditScore: $showingEditScore, showingDeleteAlert: $showingDeleteAlert)
                             .toolbar {
                                 ToolbarItemGroup(placement: .bottomBar) {
                                     toolbarItems(pool: pool, proxy: proxy, yourScore: $yourScore, opponentScore: $opponentScore, scoreBout: $scoreBout, showingEditScore: $showingEditScore)
@@ -75,13 +80,37 @@ struct PoolView: View {
         }
         .environmentObject(pool)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle(pool.uName)
-        .navigationBarItems(trailing: Button(action: {
+        .navigationTitle(pool.uStrip)
+        /*.navigationBarItems(trailing: Button(action: {
             showingInfo = true
         }) {
             Image(systemName: "info.circle")
-        })
-        .fullScreenCover(isPresented: $showingInfo) {
+         })*/
+        .navigationBarItems(trailing: Button(action: {
+            if let url = URL(string: pool.uUrl) {
+                print("Opened")
+                openURL(url)
+            } else {
+                showingUrlIssue = true
+            }
+            print(pool.uUrl)
+        }) {
+            Image(systemName: "arrowshape.turn.up.right")
+        }
+        )
+        .alert(isPresented: $showingUrlIssue) {
+            Alert(title: Text("URL Problem"), message: Text("Sorry, the Fencing Time link couldn't be opened."), dismissButton: .cancel())
+        }
+        .alert(isPresented: $showingDeleteAlert) {
+            Alert(title: Text("Are you sure?"), message: Text("Do you really want to delete this pool?"), primaryButton: .destructive(Text("Delete")) {
+                presentationMode.wrappedValue.dismiss()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    moc.delete(pool)
+                    try? moc.save()
+                }
+            }, secondaryButton: .cancel())
+        }
+        .sheet(isPresented: $showingInfo) {
             PoolInfo(pool: pool)
         }
     }
@@ -97,11 +126,11 @@ struct PoolView: View {
             ZoomableScrollView {
                 LazyVGrid(columns: columns, spacing: 0) {
                     Text("")
-                    ForEach(1...pool.uFencers.count, id: \.self) { i in
+                    ForEach(0..<pool.uFencers.count, id: \.self) { i in
                         VStack {
-                            Text("\(i)")
+                            Text("\(i+1)")
                                 .bold()
-                                .if(pool.isTracked(fencer: pool.uFencers[i-1])) {view in
+                                .if(pool.isTracked(fencer: pool.uFencers[i])) {view in
                                     view.foregroundColor(trackedColor)
                                 }
                                 .font(.system(size: 11))
@@ -201,7 +230,6 @@ struct PoolView: View {
         
         var body: some View {
             switch type {
-            
             case .untrackedSelf:
                 Color(.darkGray)
                     .celll(size: cellSize, isTracked: false)
@@ -228,7 +256,6 @@ struct PoolView: View {
                 Text(pool.getScore(fencer: num, opponent: fencer.uNumber) ?? "")
                     .celll(size: cellSize, isTracked: true)
                     .background(Color(pool.hasWon(fencer: num, opponent: fencer.uNumber) ? "GridGreen" : "GridRed"))
-                
             }
         }
     } // Each score cell
@@ -453,6 +480,8 @@ struct PoolView: View {
         @Binding var scoreBout: Bout?
         @Binding var showingEditScore: Bool
         
+        @Binding var showingDeleteAlert: Bool
+        
         var body: some View {
             List {
                 Section(header: Text("Bouts")) {
@@ -462,6 +491,11 @@ struct PoolView: View {
                         
                     }
                 }
+                
+                Button("Delete Pool") {
+                    showingDeleteAlert = true
+                }
+                .foregroundColor(.red)
             }
             .listStyle(InsetGroupedListStyle())
         }
@@ -470,6 +504,7 @@ struct PoolView: View {
     struct boutListRow: View {
         @AppStorage("trackedColor") var trackedColor = Color.teal
         @Environment(\.managedObjectContext) private var moc
+        @Environment(\.presentationMode) var presentationMode
         
         @ObservedObject var pool: Pool
         @ObservedObject var bout: Bout

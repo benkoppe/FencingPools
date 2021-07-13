@@ -30,12 +30,11 @@ struct PoolInfo: View {
                 HStack {
                     trackedNameButton(pool: pool, trackedName: $trackedName, fencers: fencers)
                     Spacer()
-                    editFencersButton(pool: pool, fencers: $fencers)
                 }
                 .padding([.horizontal, .bottom])
                 
-                Spacer().frame(height: 10)
-                editBouts(pool: pool, bouts: $bouts)
+                //Spacer().frame(height: 50)
+                editFencers(pool: pool, fencers: $fencers)
                 
             }
             .navigationTitle("Settings")
@@ -158,26 +157,61 @@ struct PoolInfo: View {
         @ObservedObject var pool: Pool
         @Binding var fencers: [Fencer]
         
+        @Environment(\.managedObjectContext) private var moc
+        
+        @State private var showingWarning = false
+        @State private var deleteFencer: Fencer?
+        
         var body: some View {
-            List {
-                ForEach(fencers) { fencer in
-                    HStack {
-                        Text("\(fencer.uNumber+1)")
-                            .foregroundColor(.secondary)
-                        Text(fencer.uName)
-                            .font(.caption)
-                            .lineLimit(1)
+            VStack {
+                
+                /*HStack {
+                    Spacer()
+                    Text("Fencers")
+                        .font(.title2)
+                    Spacer()
+                }*/
+                
+                
+                List {
+                    ForEach(fencers) { fencer in
+                        if deleteFencer != fencer {
+                            HStack {
+                                Spacer()
+                                Text("\(fencer.uNumber+1)")
+                                    .foregroundColor(.secondary)
+                                Text(fencer.uName)
+                                    .font(.caption)
+                                    .lineLimit(1)
+                                Spacer()
+                            }
+                        }
+                    }
+                    .onDelete(perform: delete)
+                    .onMove(perform: move)
+                    .alert(isPresented: $showingWarning) {
+                        Alert(title: Text("Are you sure?"), message: Text("Do you really want to delete this fencer, and all of their bouts?"), primaryButton: .destructive(Text("Delete")) {
+                            if let fencer = deleteFencer {
+                                pool.deleteFencer(fencer: fencer)
+                            }
+                        }, secondaryButton: .cancel() {
+                            deleteFencer = nil
+                        })
                     }
                 }
-                .onDelete(perform: delete)
-                .onMove(perform: move)
             }
-            .listStyle(InsetGroupedListStyle())
-            .navigationBarItems(trailing: EditButton())
         }
         
         func delete(at offsets: IndexSet) {
-            fencers.remove(atOffsets: offsets)
+            for offset in offsets {
+                deleteFencer = fencers[offset]
+                showingWarning = true
+            }
+        }
+        
+        func readd(fencer: Fencer) {
+            moc.insert(pool)
+            try? moc.save()
         }
         
         func move(from source: IndexSet, to destination: Int) {

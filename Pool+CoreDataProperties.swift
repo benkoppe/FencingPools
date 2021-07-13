@@ -20,11 +20,15 @@ extension Pool {
     @NSManaged public var defaultName: String?
     @NSManaged public var date: String?
     @NSManaged public var dDate: Date?
+    @NSManaged public var url: String?
+    @NSManaged public var strip: String?
     @NSManaged public var trackName: String?
     @NSManaged public var bouts: NSOrderedSet?
     @NSManaged public var fencers: NSOrderedSet?
     @NSManaged public var id: Int16
     @NSManaged public var currentBout: Int16
+    
+    @NSManaged public var uuid: UUID?
     
     @NSManaged public var deleteItem: Bool
     
@@ -38,6 +42,14 @@ extension Pool {
     
     public var uDate: String {
         return date ?? ""
+    }
+    
+    public var uUrl: String {
+        return url ?? ""
+    }
+    
+    public var uStrip: String {
+        return strip ?? ""
     }
     
     public var uTrackName: String {
@@ -211,6 +223,25 @@ extension Pool {
     func isNameDefault() -> Bool {
         return uDefaultName == uName
     }
+    
+    func deleteFencer(fencer: Fencer) {
+        var fencerArr = uFencers
+        for index in 0..<fencerArr.count {
+            if fencerArr[index] == fencer {
+                fencerArr.remove(at: index)
+            }
+        }
+        
+        var boutArr = uBouts
+        for index in 0..<boutArr.count {
+            if boutArr[index].isFencerIn(fencer) {
+                boutArr.remove(at: index)
+            }
+        }
+        
+        fencers = NSOrderedSet(array: fencerArr)
+        bouts = NSOrderedSet(array: boutArr)
+    }
 }
 
 extension Pool {
@@ -222,14 +253,18 @@ extension Pool {
 }
 
 extension Pool {
-    convenience init(fencers: [String], bouts: [String], name: String, date: String, number: Int, context: NSManagedObjectContext) {
+    convenience init(fencers: [String], bouts: [String], name: String, date: String, number: Int, strip: String, url: String, context: NSManagedObjectContext) {
         self.init(context: context)
         
         self.name = name
         self.defaultName = name
         self.date = date
         self.setDate(date: date)
+        self.strip = strip
+        self.url = url
         self.id = Int16(number)
+        
+        self.uuid = UUID()
         
         self.deleteItem = false
         

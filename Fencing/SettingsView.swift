@@ -8,16 +8,31 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @Environment(\.presentationMode) private var presentationMode
+    
+    @Environment(\.managedObjectContext) private var moc
+    @FetchRequest(entity: Pool.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Pool.dDate, ascending: false)]) private var pools: FetchedResults<Pool>
+    @State private var showingDeleteWarning = false
     
     var body: some View {
         Form {
             NameSection()
-            
+            ColorSchemeSelection()
             ToolbarSection()
             
+            DeleteAllButton(showDeleteWarning: $showingDeleteWarning)
         }
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
+        .alert(isPresented: $showingDeleteWarning) {
+            Alert(title: Text("Are you sure?"), message: Text("Do you really want to delete all of your saved pools? This action cannot be undone."), primaryButton: .destructive(Text("Delete")) {
+                for pool in pools {
+                    moc.delete(pool)
+                }
+                try? moc.save()
+                presentationMode.wrappedValue.dismiss()
+            }, secondaryButton: .cancel())
+        }
     }
 }
 
@@ -47,7 +62,7 @@ struct NameSection: View {
             }
         }
         
-        Section(footer: Text("\n")) {
+        Section(footer: Text("")) {
             HStack {
                 Text("Highlight Color")
                 Spacer()
@@ -58,6 +73,21 @@ struct NameSection: View {
                 ColorPicker("Name Color", selection: $trackedColor)
                     .labelsHidden()
             }
+        }
+    }
+}
+
+struct ColorSchemeSelection: View {
+    @AppStorage("colorScheme") var colorScheme: colorScheme = .dark
+    
+    var body: some View {
+        Section(header: Text("Color Scheme")) {
+            Picker("Preferred Color Scheme", selection: $colorScheme) {
+                Text("System").tag(Fencing.colorScheme.system)
+                Text("Dark").tag(Fencing.colorScheme.dark)
+                Text("Light").tag(Fencing.colorScheme.light)
+            }
+            .pickerStyle(SegmentedPickerStyle())
         }
     }
 }
@@ -74,7 +104,7 @@ struct ToolbarSection: View {
                         \(Image(systemName: ToolbarItemType.rightArrow.info.image))\t\(ToolbarItemType.rightArrow.info.extendedDescription)
                         \(Image(systemName: ToolbarItemType.scrollToItem.info.image))\t\(ToolbarItemType.scrollToItem.info.extendedDescription)
                         \(Image(systemName: ToolbarItemType.editScore.info.image))\t\(ToolbarItemType.editScore.info.extendedDescription)
-                        """).padding(.top, 3)
+                        """).padding(.top, 13)
         ) {
             ToolbarCounter(toolbarItemCount: $toolbarItemCount, toolbarItems: $toolbarItems)
                 .padding(3)
@@ -129,6 +159,21 @@ struct ToolbarSection: View {
                     Spacer()
                 }
             }
+        }
+    }
+}
+
+struct DeleteAllButton: View {
+    @Binding var showDeleteWarning: Bool
+    
+    var body: some View {
+        Section(header: Text("Delete Everything").padding(.top, 30)) {
+            Button(action: {
+                showDeleteWarning = true
+            }) {
+                Text("Delete All Pools")
+            }
+            .foregroundColor(.red)
         }
     }
 }

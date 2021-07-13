@@ -10,12 +10,14 @@ import SwiftUI
 @main
 struct FencingApp: App {
     let persistenceController = PersistenceController.shared
+    @AppStorage("colorScheme") var colorScheme: colorScheme = .dark
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-            //AllBracketsView()
+                .preferredColorScheme(colorScheme.getActualScheme())
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                
         }
     }
 }
