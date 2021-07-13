@@ -23,19 +23,19 @@ enum ToolbarItemType: Int, Codable, Identifiable, CaseIterable, Hashable {
     
     var id: Int { rawValue }
     
-    var info: (image: String, description: String) {
+    var info: (image: String, description: String, extendedDescription: String) {
         switch self {
         
         case .blank:
-            return ("square.dashed", "Blank")
+            return ("square.dashed", "Blank", "A blank space in the toolbar.")
         case .leftArrow:
-            return ("arrow.left", "Left one bout")
+            return ("arrow.left", "Left one bout", "Move backwards one bout, hold to jump to start.")
         case .rightArrow:
-            return ("arrow.right", "Right one bout")
+            return ("arrow.right", "Right one bout", "Move forwards one bout, hold to jump to end.")
         case .scrollToItem:
-            return ("arrow.down.to.line", "Scroll to current bout")
+            return ("arrow.down.to.line", "Scroll to current bout", "Scroll directly to the current bout.")
         case .editScore:
-            return ("square.and.pencil", "Edit bout score")
+            return ("square.and.pencil", "Edit bout score", "Edit the score for bouts with the tracked fencer.")
         
         }
     }

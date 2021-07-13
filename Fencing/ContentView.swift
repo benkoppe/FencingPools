@@ -12,7 +12,7 @@ import PopupView
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var moc
-    @FetchRequest(entity: Pool.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Pool.id, ascending: true)]) private var pools: FetchedResults<Pool>
+    @FetchRequest(entity: Pool.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Pool.dDate, ascending: false)]) private var pools: FetchedResults<Pool>
     
     @AppStorage("defaultName") var defaultName = ""
     
@@ -101,22 +101,12 @@ struct ContentView: View {
             .navigationTitle("Fencing")
             .disabled(stillLoading)
             .navigationBarItems(
-                leading: NavigationLink(destination: AllBracketsView()) {
+                /*leading: NavigationLink(destination: AllBracketsView()) {
                     Text("DE Bracket")
-                },
+                },*/
                 trailing: NavigationLink(destination: SettingsView()) {
                     Image(systemName: "gear")
                 })
-            .onReceive(NotificationCenter.default.publisher(for: .didSelectDeleteItem)) { _ in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    for pool in pools {
-                        if pool.deleteItem {
-                            moc.delete(pool)
-                            try? moc.save()
-                        }
-                    }
-                }
-            }
         }
     }
     

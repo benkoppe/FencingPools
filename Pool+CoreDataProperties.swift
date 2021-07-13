@@ -19,6 +19,7 @@ extension Pool {
     @NSManaged public var name: String?
     @NSManaged public var defaultName: String?
     @NSManaged public var date: String?
+    @NSManaged public var dDate: Date?
     @NSManaged public var trackName: String?
     @NSManaged public var bouts: NSOrderedSet?
     @NSManaged public var fencers: NSOrderedSet?
@@ -213,12 +214,21 @@ extension Pool {
 }
 
 extension Pool {
+    func setDate(date: String) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, MMMM d, yyyy h:mm a"
+        dDate = formatter.date(from: uDate) ?? Date()
+    }
+}
+
+extension Pool {
     convenience init(fencers: [String], bouts: [String], name: String, date: String, number: Int, context: NSManagedObjectContext) {
         self.init(context: context)
         
         self.name = name
         self.defaultName = name
         self.date = date
+        self.setDate(date: date)
         self.id = Int16(number)
         
         self.deleteItem = false
@@ -246,6 +256,7 @@ extension Pool {
         self.name = name
         self.defaultName = name
         self.date = "December 1, 2020"
+        self.setDate(date: date ?? "")
         self.id = Int16(1)
         self.deleteItem = false
         

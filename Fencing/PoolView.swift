@@ -76,11 +76,11 @@ struct PoolView: View {
         .environmentObject(pool)
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(pool.uName)
-        /*.navigationBarItems(trailing: Button(action: {
+        .navigationBarItems(trailing: Button(action: {
             showingInfo = true
         }) {
             Image(systemName: "info.circle")
-        })*/
+        })
         .fullScreenCover(isPresented: $showingInfo) {
             PoolInfo(pool: pool)
         }

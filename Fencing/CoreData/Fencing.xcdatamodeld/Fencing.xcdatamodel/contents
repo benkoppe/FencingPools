@@ -29,6 +29,7 @@
     <entity name="Pool" representedClassName="Pool" syncable="YES">
         <attribute name="currentBout" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="dDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="defaultName" optional="YES" attributeType="String"/>
         <attribute name="deleteItem" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -40,7 +41,7 @@
     <elements>
         <element name="Bout" positionX="-63" positionY="-18" width="128" height="149"/>
         <element name="Fencer" positionX="-36" positionY="63" width="128" height="149"/>
-        <element name="Pool" positionX="-63" positionY="0" width="128" height="164"/>
+        <element name="Pool" positionX="-63" positionY="0" width="128" height="179"/>
         <element name="BracketItem" positionX="-45" positionY="72" width="128" height="89"/>
     </elements>
 </model>

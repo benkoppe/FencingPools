@@ -26,14 +26,30 @@ struct NameSection: View {
     @AppStorage("trackedColor") var trackedColor = Color.teal
     
     var body: some View {
-        Section(header: Text("Tracked Name"), footer: Text("Will use this name as a default when creating pools. Use your exact USA Fencing name.")) {
+        Section(header: Text("Tracked Name"), footer: Text("This name will be used as a default when creating pools. Use your exact USA Fencing name.")) {
             
-            TextField("Default name", text: $defaultName)
+            HStack {
+                TextField("Default name", text: $defaultName)
+                
+                Spacer()
+                
+                if !defaultName.isEmpty {
+                    Button(action: {
+                        defaultName = ""
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.secondaryLabel)
+                            .font(.callout)
+                            .padding(.leading)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
+            }
         }
         
-        Section(footer: Text("Will highlight your name in this color\n")) {
+        Section(footer: Text("\n")) {
             HStack {
-                Text("Name Color")
+                Text("Highlight Color")
                 Spacer()
                 Button("Reset") { trackedColor = Color.teal }
                     .buttonStyle(PlainButtonStyle())
@@ -51,7 +67,15 @@ struct ToolbarSection: View {
     @AppStorage("toolbarItems") var toolbarItems: [ToolbarItemType] = defaultToolbar
     
     var body: some View {
-        Section(header: Text("Toolbar")) {
+        Section(header: Text("Toolbar"), footer:
+                    Text("""
+                        \(Image(systemName: ToolbarItemType.blank.info.image))\t\(ToolbarItemType.blank.info.extendedDescription)
+                        \(Image(systemName: ToolbarItemType.leftArrow.info.image))\t\(ToolbarItemType.leftArrow.info.extendedDescription)
+                        \(Image(systemName: ToolbarItemType.rightArrow.info.image))\t\(ToolbarItemType.rightArrow.info.extendedDescription)
+                        \(Image(systemName: ToolbarItemType.scrollToItem.info.image))\t\(ToolbarItemType.scrollToItem.info.extendedDescription)
+                        \(Image(systemName: ToolbarItemType.editScore.info.image))\t\(ToolbarItemType.editScore.info.extendedDescription)
+                        """).padding(.top, 3)
+        ) {
             ToolbarCounter(toolbarItemCount: $toolbarItemCount, toolbarItems: $toolbarItems)
                 .padding(3)
             
