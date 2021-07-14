@@ -48,6 +48,7 @@
 		B575CD47269A0DB300E8D748 /* BracketItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD45269A0DB300E8D748 /* BracketItem+CoreDataProperties.swift */; };
 		B575CD49269CAEE100E8D748 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD48269CAEE100E8D748 /* NotificationCenter.swift */; };
 		B575CD51269CE8AF00E8D748 /* Array-RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD50269CE8AF00E8D748 /* Array-RawRepresentable.swift */; };
+		B575CD55269DC84000E8D748 /* BoardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575CD54269DC84000E8D748 /* BoardingPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +137,7 @@
 		B575CD45269A0DB300E8D748 /* BracketItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BracketItem+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		B575CD48269CAEE100E8D748 /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 		B575CD50269CE8AF00E8D748 /* Array-RawRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-RawRepresentable.swift"; sourceTree = "<group>"; };
+		B575CD54269DC84000E8D748 /* BoardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				B5205F91268FF51C00022CCD /* FencingApp.swift */,
+				B575CD54269DC84000E8D748 /* BoardingPage.swift */,
 				B5205F93268FF51C00022CCD /* ContentView.swift */,
 				B52FA617269170AF00CD5331 /* SettingsView.swift */,
 				B5205FDC2690BA5A00022CCD /* PoolView.swift */,
@@ -469,6 +472,7 @@
 				B575CD3D2699ED9600E8D748 /* BracketOfSixteen.swift in Sources */,
 				B5205FE12690E24200022CCD /* Fencer+CoreDataProperties.swift in Sources */,
 				B575CD362698E63E00E8D748 /* BracketOfEight.swift in Sources */,
+				B575CD55269DC84000E8D748 /* BoardingPage.swift in Sources */,
 				B52FA6242692C36C00CD5331 /* AllBracketsView.swift in Sources */,
 				B5205F94268FF51C00022CCD /* ContentView.swift in Sources */,
 				B5367C8C26955B1300A3C12E /* Color-AppStorage.swift in Sources */,

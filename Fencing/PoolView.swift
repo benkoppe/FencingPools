@@ -124,6 +124,11 @@ struct PoolView: View {
         
         var body: some View {
             ZoomableScrollView {
+                if pool.uFencers.count < 7 {
+                    Spacer()
+                        .frame(height: 0 + (CGFloat(pool.uFencers.count - 7) * -5))
+                }
+                
                 LazyVGrid(columns: columns, spacing: 0) {
                     Text("")
                     ForEach(0..<pool.uFencers.count, id: \.self) { i in
@@ -145,41 +150,7 @@ struct PoolView: View {
                         fencerRow(pool: pool, num: i)
                         
                         ForEach(pool.uFencers) { fencer in
-                            
-                            if pool.isTracked(fencer: fencer) || pool.isTracked(fencer: pool.uFencers[i]) {
-                                if i == fencer.uNumber {
-                                    
-                                    fencerCell(type: .trackedSelf, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
-                                    
-                                } else if pool.isBoutScored(fencer: i, opponent: fencer.uNumber) {
-                                    
-                                    fencerCell(type: .trackedScore, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
-                                    
-                                } else if pool.isBoutComplete(fencer: i, opponent: fencer.uNumber) {
-                                    
-                                    fencerCell(type: .trackedCompleted, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
-                                    
-                                } else {
-                                    
-                                    fencerCell(type: .trackedNoScore, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
-                                    
-                                }
-                            } else  {
-                                
-                                if i == fencer.uNumber {
-                                    
-                                    fencerCell(type: .untrackedSelf, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
-                                    
-                                } else if pool.isBoutComplete(fencer: i, opponent: fencer.uNumber) {
-                                    
-                                    fencerCell(type: .untrackedCompleted, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
-                                    
-                                } else {
-                                    
-                                    fencerCell(type: .untrackedNoScore, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
-                                    
-                                }
-                            }
+                            fencerItem(fencer: fencer, i: i, smallCellSize: smallCellSize)
                         }
                         
                     }
@@ -216,6 +187,59 @@ struct PoolView: View {
             }
         }
     } // First column
+    
+    struct fencerItem: View {
+        @EnvironmentObject var pool: Pool
+        let fencer: Fencer
+        let i: Int
+        
+        let smallCellSize: CGFloat
+        
+        var bout: Bout? {
+            if let opponent = pool.getFencer(number: i) {
+                return pool.getBout(fencer: fencer, opponent: opponent)
+            } else {
+                return nil
+            }
+        }
+        
+        var body: some View {
+            if pool.isTracked(fencer: fencer) || pool.isTracked(fencer: pool.uFencers[i]) {
+                if i == fencer.uNumber {
+                    
+                    fencerCell(type: .trackedSelf, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
+                    
+                } else if pool.isBoutScored(fencer: i, opponent: fencer.uNumber) {
+                    
+                    fencerCell(type: .trackedScore, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
+                    
+                } else if pool.isBoutComplete(fencer: i, opponent: fencer.uNumber) {
+                    
+                    fencerCell(type: .trackedCompleted, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
+                    
+                } else {
+                    
+                    fencerCell(type: .trackedNoScore, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
+                    
+                }
+            } else  {
+                
+                if i == fencer.uNumber {
+                    
+                    fencerCell(type: .untrackedSelf, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
+                    
+                } else if pool.isBoutComplete(fencer: i, opponent: fencer.uNumber) {
+                    
+                    fencerCell(type: .untrackedCompleted, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
+                    
+                } else {
+                    
+                    fencerCell(type: .untrackedNoScore, pool: pool, num: i, fencer: fencer, cellSize: smallCellSize)
+                    
+                }
+            }
+        }
+    }
     
     struct fencerCell: View {
         let type: cellTypes
@@ -320,6 +344,17 @@ struct PoolView: View {
                 
                 HStack {
                     Button(action: {
+                        self.yourScore = ""; self.opponentScore = ""
+                        withAnimation { showingEditScore = false }
+                    }) {
+                        Text("Cancel")
+                            .padding(.horizontal)
+                    }
+                    .foregroundColor(.red)
+                    
+                    Spacer().frame(width: 35)
+                    
+                    Button(action: {
                         if let yourScoreInt = Int(yourScore), let opponentScoreInt = Int(opponentScore) {
                             self.yourScoreInt = yourScoreInt
                             self.opponentScoreInt = opponentScoreInt
@@ -331,17 +366,6 @@ struct PoolView: View {
                     }
                     .disabled(!isStringInt(yourScore) || !isStringInt(opponentScore))
                     .disabled(yourScore.isEmpty || opponentScore.isEmpty)
-                    
-                    Spacer().frame(width: 35)
-                    
-                    Button(action: {
-                        self.yourScore = ""; self.opponentScore = ""
-                        withAnimation { showingEditScore = false }
-                    }) {
-                        Text("Cancel")
-                            .padding(.horizontal)
-                    }
-                    .foregroundColor(.red)
                 }
             }
             .alert(isPresented: $showingIssueAlert) {
@@ -620,6 +644,8 @@ struct PoolView: View {
         } // Jumps to selected bout
         
         struct editBoutButtons: View {
+            @Environment(\.managedObjectContext) private var moc
+            
             @ObservedObject var pool: Pool
             @ObservedObject var bout: Bout
             
@@ -630,21 +656,37 @@ struct PoolView: View {
             
             var body: some View {
                 if pool.isBoutTracked(bout: bout) {
-                    Button(action: {
-                        yourScore = ""; opponentScore = ""
-                        scoreBout = bout
-                        withAnimation { showingEditScore = true }
-                    }) {
-                        Image(systemName: "square.and.pencil")
-                        Text("Input Score")
+                    
+                    if !(showingEditScore == true && scoreBout == bout) {
+                        Button(action: {
+                            yourScore = ""; opponentScore = ""
+                            scoreBout = bout
+                            withAnimation { showingEditScore = true }
+                        }) {
+                            Image(systemName: "square.and.pencil")
+                            Text("Input Score")
+                        }
                     }
                     
                     if showingEditScore == true && scoreBout == bout {
                         Button(action: {
                             withAnimation { showingEditScore = false }
                         }) {
-                            Image(systemName: "pencil.slash")
+                            Image(systemName: "square.and.pencil")
                             Text("Cancel Input")
+                        }
+                    }
+                    
+                    if bout.hasScore {
+                        Button(action: {
+                            pool.objectWillChange.send()
+                            bout.hasScore = false
+                            bout.leftScore = 0
+                            bout.rightScore = 0
+                            try? moc.save()
+                        }) {
+                            Text("Remove Score")
+                            Image(systemName: "pencil.slash")
                         }
                     }
                 }
@@ -808,6 +850,9 @@ struct fencerCellFormat: ViewModifier {
             .font(.system(size: 10))
             .frame(minWidth: cellSize+1, minHeight: cellSize+1)
             .border(isTracked ? Color.secondary : Color.secondary)
+            .onTapGesture {
+                print("lmao")
+            }
             .id(UUID())
     }
 }

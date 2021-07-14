@@ -35,6 +35,9 @@ struct ContentView: View {
     @State private var showingWarning = false
     @State private var deletePool: Pool?
     
+    @State private var showURLError = false
+    @State private var showErrorAlert = false
+    
     var body: some View {
         NavigationView {
             Form {
@@ -89,6 +92,12 @@ struct ContentView: View {
                 }
                 .actionSheet(isPresented: $showingNameSelect) {
                     getNameSheet()
+                }
+                .alert(isPresented: $showErrorAlert) {
+                    Alert(title: Text("Error"), message: Text("Sorry, there was an issue loading your data. Please try again."), dismissButton: .cancel(Text("OK")) { stillLoading = false })
+                }
+                .alert(isPresented: $showURLError) {
+                    Alert(title: Text("URL Error"), message: Text("It looks like you weren't using the correct URL. Please use the URL from an individual pool's 'Detail' page."), dismissButton: .cancel(Text("OK")) { url = "" } )
                 }
                 
             }
@@ -182,10 +191,14 @@ struct ContentView: View {
     }
     
     func fetchNewData(url: String) {
-        loadPage(url: url)
-        stillLoading = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            waitForLoad()
+        if url.contains("https://fencingtimelive.com/pools/details/") {
+            loadPage(url: url)
+            stillLoading = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                waitForLoad()
+            }
+        } else {
+            showURLError = true
         }
     }
     
@@ -280,11 +293,15 @@ struct ContentView: View {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            stillLoading = false
-            if !useDefaultName {
-                showingNameSelect = true
+            if !fencers.isEmpty {
+                stillLoading = false
+                if !useDefaultName {
+                    showingNameSelect = true
+                } else {
+                    finishFetch(trackName: defaultName)
+                }
             } else {
-                finishFetch(trackName: defaultName)
+                showErrorAlert = true
             }
         }
     }
