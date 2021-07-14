@@ -50,7 +50,6 @@ struct PoolView: View {
                 Spacer()
                     .frame(height: 5)
                 
-                
                 scoreTable(pool: pool, columns: columns, smallCellSize: smallCellSize)
                 
                 if showingEditScore, let bout = scoreBout, let tracked = pool.getTracked(), let opponent = bout.getOpponent(tracked) {
