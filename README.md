@@ -1,5 +1,5 @@
 <a><img src="Images/MainScreen.png" align="center" height="30%" width="30%" hspace="10"></a>
-<a><img src="Images/BoutTable.png" align="center" height="30%" width="30%" hspace="10"></a>
+<a><img src="Images/BoutTableCensored.png" align="center" height="30%" width="30%" hspace="10"></a>
 <a><img src="Images/Settings.png" align="center" height="30%" width="30%" hspace="10"></a>
 
 # FencingPools
