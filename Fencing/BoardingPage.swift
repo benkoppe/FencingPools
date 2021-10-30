@@ -17,13 +17,13 @@ struct BoardingPage: View {
         ZStack {
             
             TabView(selection: $tab) {
-                BoardingItem(text: "Hello", tab: $tab)
+                BoardingItem(text: "Create Pools", description: "Quickly generate pools with just a URL.", tab: $tab)
                     .tag(0)
-                BoardingItem(text: "Goodbye", tab: $tab)
+                BoardingItem(text: "Follow in real time", description: "Use the toolbar to move forwards and backwards through bouts, and to enter your scores.", tab: $tab)
                     .tag(1)
-                BoardingItem(text: "Three", tab: $tab)
+                BoardingItem(text: "And more!", description: "Customize in the settings menu, and hold names to access extra options.", tab: $tab)
                     .tag(2)
-                    .redacted(reason: .placeholder)
+                    //.redacted(reason: .placeholder)
             }
             .tabViewStyle(PageTabViewStyle())
             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
@@ -64,6 +64,7 @@ struct BoardingPage: View {
 
 struct BoardingItem: View {
     let text: String
+    let description: String
     @Binding var tab: Int
     
     var body: some View {
@@ -72,7 +73,7 @@ struct BoardingItem: View {
                 .resizable()
                 .scaledToFit()
                 .padding(30)
-                .clipShape(RoundedRectangle(cornerRadius: 40))
+                .clipShape(RoundedRectangle(cornerRadius: 20))
                 .shadow(radius: 20)
             
             Spacer().frame(height: 20)
@@ -80,14 +81,14 @@ struct BoardingItem: View {
             HStack {
                 Text(text)
                     .font(.title)
+                    .foregroundColor(.blue)
                     .bold()
-                
                 Spacer()
             }
             .padding(.horizontal, 40)
             
             HStack {
-                Text("Create something something something")
+                Text(description)
                     .font(.callout)
                     .italic()
                 
@@ -104,5 +105,6 @@ struct BoardingItem: View {
 struct BoardingPage_Previews: PreviewProvider {
     static var previews: some View {
         BoardingPage(showingLanding: .constant(true))
+            .preferredColorScheme(.dark)
     }
 }

@@ -51,7 +51,7 @@ enum ToolbarItemType: Int, Codable, Identifiable, CaseIterable, Hashable {
     }
 }
 
-let defaultToolbar: [ToolbarItemType] = [.scrollToItem, .leftArrow, .rightArrow, .editScore, .blank, .blank, .blank, .blank]
+let defaultToolbar: [ToolbarItemType] = [.leftArrow, .rightArrow, .scrollToItem, .editScore, .blank, .blank, .blank, .blank]
 let defaultToolbarSize = 4
 
 enum colorScheme: Int, Codable, Identifiable, CaseIterable, Hashable {

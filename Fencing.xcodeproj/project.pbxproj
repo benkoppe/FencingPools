@@ -260,12 +260,12 @@
 				B575CD44269A0DB300E8D748 /* BracketItem+CoreDataClass.swift */,
 				B575CD45269A0DB300E8D748 /* BracketItem+CoreDataProperties.swift */,
 				B5205FDE2690E24200022CCD /* Fencer+CoreDataClass.swift */,
-				B575CD48269CAEE100E8D748 /* NotificationCenter.swift */,
 				B5205FDF2690E24200022CCD /* Fencer+CoreDataProperties.swift */,
 				B5205FD02690AF2200022CCD /* Bout+CoreDataClass.swift */,
 				B5205FD12690AF2200022CCD /* Bout+CoreDataProperties.swift */,
 				B5205FD22690AF2200022CCD /* Pool+CoreDataClass.swift */,
 				B5205FD32690AF2200022CCD /* Pool+CoreDataProperties.swift */,
+				B575CD48269CAEE100E8D748 /* NotificationCenter.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -681,8 +681,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Fencing/Preview Content\"";
-				DEVELOPMENT_TEAM = 4DWUZ6JCGN;
+				DEVELOPMENT_TEAM = T8PATWK92J;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Fencing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -690,7 +691,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.benk.flagguess.Guess-the-Flag";
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.benkoppe.fencing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -704,8 +706,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Fencing/Preview Content\"";
-				DEVELOPMENT_TEAM = 4DWUZ6JCGN;
+				DEVELOPMENT_TEAM = T8PATWK92J;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Fencing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -713,7 +716,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.benk.flagguess.Guess-the-Flag";
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.benkoppe.fencing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -808,14 +812,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4DWUZ6JCGN;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = T8PATWK92J;
 				INFOPLIST_FILE = FencingTimeURL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.benk.flagguess.Guess-the-Flag.FencingTimeURL";
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.benkoppe.fencing.url;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -827,14 +833,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4DWUZ6JCGN;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = T8PATWK92J;
 				INFOPLIST_FILE = FencingTimeURL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.benk.flagguess.Guess-the-Flag.FencingTimeURL";
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.benkoppe.fencing.url;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;

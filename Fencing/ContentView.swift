@@ -191,7 +191,7 @@ struct ContentView: View {
     }
     
     func fetchNewData(url: String) {
-        if url.contains("https://fencingtimelive.com/pools/details/") {
+        if url.contains("https://www.fencingtimelive.com/pools/details/") || url.contains("https://fencingtimelive.com/pools/details/") {
             loadPage(url: url)
             stillLoading = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
